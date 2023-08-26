@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container col-xl-10 col-xxl-8 px-4">
+    <div class="row align-items-center g-lg-5 py-5">
+        <div class="col-lg-7 text-center text-lg-start">
+            <h2 id="reg_text" class="bolt">Тицяй для реєстрації</h2>
+            <p class="col-lg-10 fs-4">ХВИЛИНКА АФОРИЗМІВ
+                "Якщо вже наламав дров, то зроби вигляд, що готуєшся до зими…"</p>
+        </div>
+        <div class="form-body col-md-10 mx-auto col-lg-5 py-5">
+
+            <form method="post" class="shadow-lg block form-body p-4 p-md-5 border rounded-3 bg-light">
+    
+                {% csrf_token %}
+                {{ form | crispy }}
+
+                <br>
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me" onclick="show_pass_singup()"> Показать/Скрыть значения
+                    </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Зареєструватися</button>
+                <hr class="my-4">
+                <small class="text-muted">Натискаючи «Зареєструватися», ви погоджуєтеся з умовами використання.</small>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+  #main_block {
+    padding: 20px;
+  }
+  #id_price_output {
+    text-align: center;
+  }
+</style>
+
+<div id="main_block" class="form-body col-md-10 mx-auto col-lg-5 py-5">
+
+  <form method="post" class="shadow-lg form-body p-4 p-md-5 rounded-3">
+
+    {% csrf_token %}
+    {{ form | crispy }}
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <!-- <span class="text-black">Цена</span>
+      <span class="badge bg-warning rounded-pill"><strong id='id_price_output'>0</strong>
+        UAH</span> -->
+    </h4>
+
+    <button id='id_submit_button' class="w-100 btn btn-lg btn-success"
+      type="submit">Відправити </button>
+  </form>
+
+</div>
+
+<script>
+
+function updatePrice() {
+  let countInput = document.getElementById('id_count')
+  let selectInput = document.getElementById('id_service_type');
+  let selectedOption = selectInput.options[selectInput.selectedIndex];
+  let priceOption = parseInt(selectedOption.textContent.replace(/\D/g, ''));
+  let priceOutput = document.getElementById('id_price')
+
+  let OutPut = countInput.value * (priceOption / 1000 )
+  let RoundedOutPut = parseFloat(OutPut.toFixed(2));
+
+  if (isNaN(OutPut)) {
+    priceOutput.textContent = 0;
+  } else {
+    priceOutput.value = RoundedOutPut
+  }
+  
+}
+
+const countInput = document.getElementById('id_count');
+const typeInput = document.getElementById('id_service_type');
+
+countInput.addEventListener('input', updatePrice);
+typeInput.addEventListener('change', updatePrice);
+
+</script>
+
+{% endblock content %}

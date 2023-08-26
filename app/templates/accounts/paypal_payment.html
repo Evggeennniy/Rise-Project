@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h1>PayPal Integration</h1>
+<form action="{% url 'create_payment' %}" method="POST">
+    <button type="submit">Make Payment</button>
+</form>
+
+{% endblock content %}

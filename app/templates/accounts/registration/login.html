@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .form-signin {
+        text-align: center;
+    }
+    #main_block {
+        padding: 35px;
+    }
+</style>
+
+<div class="container col-lg-3 col-lg-2 px-4 py-5">
+    <form id="main_block" class="shadow-lg block border_radius20 form-signin" method="post">
+        <img class="mb-4" src="{% static 'logo_black.png' %}" alt width="72"
+            height="72">
+        <h1 class="h3 mb-3 fw-normal">Будь ласка, війдіть</h1>
+
+        {% csrf_token %}
+        {{ form | crispy }}
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"
+                    onclick="show_pass_login()"> Показати/Приховати значення
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Увійти</button>
+    </form>
+
+    {% endblock content %}
+
+</div>

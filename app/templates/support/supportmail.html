@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    .main_body {
+        min-height: 700px;
+        border-radius: 20px;
+    }
+    .message_block {
+        max-width: 100%;
+    }
+    .left_comment_images {
+        padding: 10px;
+    }
+    .animated_block {
+        margin-bottom: 20px;
+        opacity: 0; /* Начальная непрозрачность */
+        transform: translateY(100px); /* Начальное смещение вниз */
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+      
+    .fade-in.active { 
+        opacity: 1;
+        transform: translateY(0); /* Блок появляется плавно смещаясь вверх */
+    }
+</style>
+
+<main class="container col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+        class="animated_block fade-in block fade-in shadow-lg shadow-sm main_body mt-3 bg-light">
+        <div class="my-3 p-3 ">
+            <small class="d-block text-end">
+                <a>Кількість: {{ object_list.count }}</a>
+            </small>
+            <h6 class=" pb-2 mb-0">Надіслані листи</h6>
+            <hr>
+            {% if object_list %}
+            {% for obj in object_list %}
+            <div class="d-flex pt-3">
+                <img src="{% static 'logo_black.png' %}"
+                    alt="logo"
+                    class="left_comment_images"
+                    width="60" height="60">
+
+                <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                    <div class="message_block d-flex justify-content-between">
+                        <strong class="text-gray-dark">{{ obj.thema }}</strong>
+                    </div>
+                    <div>
+                        <p class="text-muted">{{ obj.question }}</p>
+
+                        <span class="d-block">@{{ request.user.username }}
+                            <small class="data text-muted">{{ obj.data }}</small></span>
+                    </div>
+                </div>
+
+                {% if obj.report %}
+                <small class="d-block text-end mt-3">
+                    <strong class="text-gray-dark">Репорт прикріплений</strong>
+                </small>
+                {% endif %}
+            </div>
+
+            {% if obj.answer %}
+            <div class="container d-flex pt-3">
+
+                <div class="pb-3 mb-0 small lh-sm">
+                    <div class="d-flex justify-content-between">
+                        <strong class="text-gray-dark">- {{ obj.answer }}</strong>
+                    </div>
+                    <span class="d-block">@Адміністратор RT</span>
+                </div>
+            </div>
+
+            <hr>
+            {% endif %}
+
+            {% endfor %}
+
+            <small class="d-block text-end mt-3">
+                <button type="button"
+                    class="btn btn-outline-success btn-sm px-4"><a
+                        class="nav-link text-dark"
+                        href="{% url 'create_support_mail' %}">Створити</a></button>
+            </small>
+
+            {% else %}
+            <div class="px-4 pt-5 my-5 text-center border-bottom">
+                <h1 class="display-4 fw-bold">Вітаю!</h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">Ви знаходитесь в місці, де можна
+                        ставити будь-які питання адміністрації. І відразу
+                        отримувати відповідь.</p>
+                    <div
+                        class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                        <button type="button" ф
+                            class="btn btn-outline-success btn-sm px-4"><a
+                                class="nav-link text-dark"
+                                href="{% url 'create_support_mail' %}">Створити</a></button>
+                    </div>
+                </div>
+                <div class="overflow-hidden" style="max-height: 30vh;">
+                    <div class="container px-5">
+                        <img src="{% static 'support_image.jpg' %}"
+                            class="img-fluid border rounded-3 shadow-lg mb-4"
+                            alt="Example image" loading="lazy" width="700"
+                            height="500">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <br>
+        </div>
+    </div>
+</main>
+
+<script>
+    const blocks = document.querySelectorAll('.fade-in');
+
+    function checkFade() {
+      blocks.forEach(block => {
+        const rect = block.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if (rect.top <= windowHeight * 0.8) {
+          block.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', checkFade);
+    window.addEventListener('load', checkFade);
+</script>
+
+{% endblock content %}

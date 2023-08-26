@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    #profile_block {
+        padding-top: 50px;
+        padding-bottom: 100px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .list-group-item {
+        border-radius: 20px;
+    }
+
+    .green_style {
+        background: rgb(46, 139, 23);
+    }
+
+    .pay_button {
+        border-radius: 20px;
+    }
+
+</style>
+
+<div class="container" id="profile_block">
+    <main>
+        <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <!-- <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-black">Баланс</span>
+                    <span class="badge green_style rounded-pill">  UAH</span>
+                    
+                </h4> -->
+                <ul class="list-group mb-3">
+                    <li class="block list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">Баланс</h6>
+                            <small class="text-muted">Ваші особисті кошти.</small>
+                        </div>
+                        <span class="text-muted">{{ object.balance }} USD</span>
+                    </li>
+                    <a class="pay_button btn btn-warning" href="{% url 'choose_payment' %}">Пополнить баланс</a>
+                </ul>
+
+            </div>
+            <div class="shadow-lg block border_radius20 form-body col-md-10 mx-auto col-lg-5 py-5 bg-light">
+                <h4 class="mb-3">Профиль</h4>
+
+                <hr>
+                <form method="post" class="needs-validation" novalidate="">
+                    <div class="row g-3">
+
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <hr>
+                        <button class="green_style w-100 btn rounded-pill text-white" type="submit">Сохранить</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+</div>
+
+{% endblock content %}

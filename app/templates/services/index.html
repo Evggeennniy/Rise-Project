@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .welcome_image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card {
+        border-radius: 20px;
+    }
+    .service {
+        padding: 20px;
+        box-shadow: 2px 2px 2px 2px;
+        border-radius: 20px;
+    }
+    .empty_message {
+        height: 250px;
+    }
+    .service_link {
+        color: black;
+    }
+    .description_text {
+        height: 75px;
+    }
+    .service_link:hover {
+        color: gray;
+    }
+    .animated_block {
+        margin-bottom: 20px;
+        opacity: 0; /* Начальная непрозрачность */
+        transform: translateY(100px); /* Начальное смещение вниз */
+        transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+      
+    .fade-in.active { 
+        opacity: 1;
+        transform: translateY(0); /* Блок появляется плавно смещаясь вверх */
+    }
+    .phone_block {
+        text-align: center;
+    }
+    .row {
+        display: flex;
+        justify-content: center; /* Центрирование по горизонтали */
+        align-items: center; /* Центрирование по вертикали */
+    }
+</style>
+
+<div class="animated_block fade-in px-4 pt-3 my-5 text-center">
+    <h1 class="display-6 fw-bold text-body-emphasis">Привіт! Головний сайт по
+        накрутці соц мереж до твоїх послуг.</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Надаємо якісь, гарну ціну, автономну систему для
+            просування твоїх соц мереж.
+            Те, що ти зможеш зробити в пару кліків.</p>
+    </div>
+    <div class="overflow-hidden" style="max-height: 30vh;">
+        <div class="container px-5">
+            <img src="{% static 'welcome_image.png' %}"
+                class="img-fluid rounded-3 shadow-lg mb-4" alt="Example image"
+                loading="lazy" width="700" height="500">
+        </div>
+    </div>
+</div>
+
+<div class="animated_block fade-in container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Ви можете знайти те, що вам потрібно.</h2>
+    <div class=" row g-4 py-5 row-cols-1 row-cols-lg-3">
+        {% if object_list %}
+
+        {% for obj in object_list %}
+        {% if obj.is_active %}
+        <a href="{% url 'services_category' %}" class="service_link nav-link">
+            <div class="col d-flex align-items-start service">
+                <div class="icon-square text-dark flex-shrink-0 me-3">
+                    <img src="{{ obj.logo.url }}"
+                        class="d-block mx-lg-auto img-fluid"
+                        alt="instagram_logo"
+                        loading="lazy" width="50" height="50">
+                </div>
+                <div>
+
+                    <h2>{{ obj.name }}</h2>
+                    <div class="description_text">
+                        {{ obj.description }}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% else %}
+        <div class="col d-flex align-items-start service">
+            <div class="icon-square text-dark flex-shrink-0 me-3">
+                <img src="{{ obj.logo.url }}"
+                    class="d-block mx-lg-auto img-fluid"
+                    alt="instagram_logo"
+                    loading="lazy" width="50" height="50">
+            </div>
+            <div>
+                <h2>{{ obj.name }}</h2>
+                <div class="description_text">
+                    Категорії по цій соц мережі,
+                    буде відома по її
+                    відкриттю
+                 </div>
+            </div>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+
+        {% else %}
+        <div class="empty_message col-sm-8 py-5 mx-auto">
+            <h3 class="display-6 fw-normal text-muted">Поки що тут нічого немає.</h3>
+            <strong class="fs-5 text-muted">Якщо адміністрації щось платять, то
+                обов'язково з'явиться.</strong>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="animated_block fade-in container col-xxl-8 px-4 py-5 phone_block">
+    <div class="row flex-lg-row-reverse align-items-center">
+        <div id='welcome_image' class="col-10 col-sm-8 col-lg-6">
+            <img src="{% static 'phone.png' %}" id="welcome_image"
+                class="d-block mx-lg-auto img-fluid" alt="welcome_image"
+                loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-6 fw-bold lh-1 mb-3">Що таке цей Rise?</h1>
+            <p class="lead">
+                Rise.ua - це твій помічник в світі розвинутих технологій.
+                Він тобі допоможе розкрутити свій профіль за лічені хвилини, до необмеженої кількості фоловерів</p>
+            <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <button type="button"
+                    class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
+                <button type="button"
+                    class="btn btn-outline-secondary btn-lg px-4">Default</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const blocks = document.querySelectorAll('.fade-in');
+
+    function checkFade() {
+      blocks.forEach(block => {
+        const rect = block.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if (rect.top <= windowHeight * 0.8) {
+          block.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', checkFade);
+    window.addEventListener('load', checkFade);
+</script>
+
+{% endblock content %}

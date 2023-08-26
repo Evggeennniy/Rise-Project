@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!-- {% load crispy_forms_tags %} -->
+
+{% block content %}
+
+<style>
+  .main_block {
+    padding: 20px;
+  }
+  .logo_block {
+    padding: 10px;
+  }
+  .item {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .animated_block {
+    margin-bottom: 20px;
+    opacity: 0; /* Начальная непрозрачность */
+    transform: translateY(100px); /* Начальное смещение вниз */
+    transition: opacity 1s ease-out, transform 1s ease-out;
+  }
+  .fade-left.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .fade-in.active { 
+    opacity: 1;
+    transform: translateY(0); /* Блок появляется плавно смещаясь вверх */
+  }
+  .description_text {
+    height: 50px;
+  }
+</style>
+
+<main class="container main_block border_radius20">
+  <div class="item fade-left p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="col-lg-6 px-0">
+      <h1 class="display-5 fst-italic">Хей! Читай останні новини
+        та Rise оновлення тут.</h1>
+      <p class="lead my-3">Будь то нові ціни на категорії, чи як скоро з'являться
+        нові соц мережі, ти будеш бачити це саме в Rise постах.</p>
+    </div>
+  </div>
+
+  {% if object_list %}
+  <div class="row mb-2">
+    {% for obj in object_list %}
+    <div class="col-md-6">
+      <div
+        class="block animated_block fade-in shadow-lg row bg g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <!-- <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong> -->
+          <h2 class="pb-2 border-bottom">{{ obj.header }}</h2>
+          <small class="data text-muted">{{ obj.data }}</small>
+          <p class="card-text mb-auto">{{ obj.short_description }}</p>
+          <a href="detail/{{ obj.id }}"
+            class="description_text">
+            Детальніше
+          </a>
+        </div>
+        <div class="logo_block col-auto d-lg-block">
+          <img src="{% static 'logo_black.png' %}"
+            alt="logo"
+            class
+            width="32" height="32">
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <div class="animated_block fade-in empty_message col-sm-8 py-5 mx-auto">
+    <h3 class="display-6 fw-normal text-muted">Поки що тут нічого немає.</h3>
+    <strong class="fs-5 text-muted">Якщо ти так і дивитимешся на цей запис і
+      дрочити тут так нічого і не з'явиться.</strong>
+  </div>
+  {% endif %}
+
+</main>
+
+<script>
+  const leftItems = document.querySelectorAll('.fade-left');
+  const blocks = document.querySelectorAll('.fade-in');
+  
+  function checkFade() {
+    leftItems.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      if (rect.top <= windowHeight * 0.8) {
+        item.classList.add('active');
+      }
+    });
+
+    blocks.forEach(block => {
+      const rect = block.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      if (rect.top <= windowHeight * 0.8) {
+        block.classList.add('active');
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', checkFade);
+  window.addEventListener('load', checkFade);
+</script>
+
+{% endblock content %}

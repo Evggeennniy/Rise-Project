@@ -1,0 +1,60 @@
+{% load static %}
+
+<style>
+    #logo {
+        width: 100%;
+        height: auto;
+        max-width: 60px;
+        text-align: center;
+      
+    }
+    
+    #navigation {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .nav_link {
+        color: mintcream;
+    }
+    .nav_link:hover {
+        color: gray;
+    }
+    .profile_image {
+      padding: 2px;
+    }
+    .balance {
+      padding: 5px;
+    }
+</style>
+
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="/"
+        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <img src="{% static 'logo_white.png' %}" alt id="logo">
+      </a>
+
+      <ul id='navigation'
+        class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'index' %}" class="nav-link px-2 nav_link">Головна</a></li>
+        <li><a href="{% url 'services_category' %}" class="nav-link px-2 nav_link">Послуги</a></li>
+        <li><a href="{% url 'support_mails' %}" class="nav-link px-2 nav_link">Підтримка</a></li>
+        <li><a href="{% url 'posts' %}" class="nav-link px-2 nav_link">Пости</a></li>
+        <li><a href="{% url 'comments' %}" class="nav-link px-2 nav_link">Відгуки</a></li>
+      </ul>
+
+      <div class="text-end">
+        {% if request.user.is_authenticated %}
+        <strong id="balance" ></strong>
+        <a class="btn btn-outline-light" href="{% url 'user_profile' %}" role="button">{{ request.user.balance }} $</a>
+        <a class="btn btn-outline-warning" href="{% url 'logout' %}" role="button">Вийти</a>
+        {% else %}
+        <a class="btn btn-outline-secondary" href="{% url 'login' %}" role="button">Увійти</a>
+        <a class="btn btn-warning" href="{% url 'sign_up' %}" role="button">Зареєструватися</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,27 @@
+[run]
+branch = True
+omit = */tests/*
+        */migrations/*
+        */asgi.py
+        */wsgi.py
+        */settings*.py
+        */app/manage.py
+        */tasks.py
+        */__init__.py
+        */apps.py
+        */utils.py
+        */signals.py
+        */forms.py
+        */views.py
+# ^ файлы, папки которые не будут проверены
+
+[report]
+precision = 2
+# ^ Количевство цифр процентов после запятой
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    def __str__
+
+[html]
+directory = .pytest_cache/coverage
