@@ -116,14 +116,19 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'rise_server',
-        'USER': 'postgres',
-        'PASSWORD': 'supreme128',
-        'HOST': '10.114.0.4',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     },
+    'prodaction': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'rise_server',
+            'USER': 'postgres',
+            'PASSWORD': 'supreme128',
+            'HOST': '10.114.0.4',
+            'PORT': '5432'
+        },
 }
+
 
 # AUTHENTICATION_BACKENDS = (
 #     'allauth.account.auth_backends.AuthenticationBackend',
