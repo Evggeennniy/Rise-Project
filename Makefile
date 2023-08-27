@@ -28,7 +28,7 @@ showcovtest:
 	python3 -c "import webbrowser; webbrowser.open('.pytest_cache/coverage/index.html')"
 
 server1:
-	cd app && gunicorn settings.wsgi:application --bind 0.0.0.0:8001 --workers 5 --threads 2 --log-level info --max-requests 20 --timeout 10
+	cd app && gunicorn settings.wsgi:application --bind 0.0.0.0:8001 --workers 2 --threads 2 --log-level info --max-requests 20 --timeout 10
 
 server2:
 	cd app && gunicorn settings.wsgi:application --bind 0.0.0.0:8002 --workers 5 --threads 2 --log-level info --max-requests 20 --timeout 10

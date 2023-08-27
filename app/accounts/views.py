@@ -70,7 +70,7 @@ class PayPalView(LoginRequiredMixin, generic.TemplateView):
     Вигляд до плати на paypal вiджети.
     """
     api = paypalrestsdk.configure({
-    "mode": "sandbox",
+    "mode": "live",
     "client_id": PAYPAL_CLIENT_ID,
     "client_secret": PAYPAL_SECRET_KEY
     })
