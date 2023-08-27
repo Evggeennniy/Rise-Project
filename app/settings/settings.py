@@ -7,9 +7,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-+q640znnpj98b*v+c!66^nl4!$ej_oe66t^*w@50oj(r**5hhj'
 
-CSRF_TRUSTED_ORIGINS = ['https://1661-87-227-170-88.ngrok-free.app',]
+CSRF_TRUSTED_ORIGINS = ['https://rise.ua', 'http://rise.ua']
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -22,15 +22,15 @@ LOGIN_URL = reverse_lazy('login')
 INTERNAL_IPS = ['127.0.0.1']
 
 # Налаштування для панелі інструментів
-DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
-}
+# DEBUG_TOOLBAR_CONFIG = {
+#     'SHOW_TOOLBAR_CALLBACK': lambda request: True,
+# }
 
 # PayPal Api
 PAYPAL_CLIENT_ID = 'AbPXGGe2lC1udAZcX1NLZmJ18OtYZuBtkjPNAw4tl7CGPmpvgZF3FpO_9Cg0ycvBwqC_T7cp0FN8fOhd'
 PAYPAL_SECRET_KEY = 'ECvSnLZDpRxBJ3hyvk-wVu0cJy4tGeIcSjrPaBhkaxSAJS0E4xtTkAhUc8EO_M21lerq-fYZf4oxzbnd'
 
-# LiqPay Api
+# LiqPay Api (Sandbox)
 LIQPAY_PUBLIC_KEY = 'sandbox_i69234533774'
 LIQPAY_PRIVATE_KEY = 'sandbox_K7Mlrs8wcb5Meoa39wQAn0knsEXyZJbXPnBv4aa3'
 
@@ -116,9 +116,13 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'rise_server',
+        'USER': 'postgres',
+        'PASSWORD': 'supreme128',
+        'HOST': '10.114.0.4',
+        'PORT': '5432'
+    },
 }
 
 # AUTHENTICATION_BACKENDS = (
@@ -174,17 +178,12 @@ Celery
 CELERY_BROKER_URL = 'amqp://localhost'
 
 CELERY_BEAT_SCHEDULE = {
-    # 'rehadlering_invalid_orders': {
-    #     'task': 'services.tasks.rehadlering_invalid_orders',
-    #     'schedule': crontab(minute='*/5'),
-    # },
-    # 'checking_completed_orders': {
-    #     'task': 'services.tasks.checking_completed_orders',
-    #     'schedule': crontab(minute='*/15'),
-    # }
+    'rehadlering_invalid_orders': {
+        'task': 'services.tasks.rehadlering_invalid_orders',
+        'schedule': crontab(minute='*/5'),
+    },
+    'checking_completed_orders': {
+        'task': 'services.tasks.checking_completed_orders',
+        'schedule': crontab(minute='*/15'),
+    }
 }
-
-# Payment settings
-# PAYMENT_HOST = 'localhost:8000'
-
-# PAYMENT_USES_SSL = False

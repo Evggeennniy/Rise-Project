@@ -16,7 +16,7 @@ class CommentsView(mixins.CacheQuerysetMixin, generic.ListView):
     Перегляд для сторінки коментарів.
     """
     cached_queryset_key = 'comments_queryset'
-    cache_time = 30 * 5
+    cache_time = 60 * 5
     queryset = comments_models.Comment.objects.select_related('client').filter(is_active=True)
     ordering = 'id'
     template_name = 'comments.html'

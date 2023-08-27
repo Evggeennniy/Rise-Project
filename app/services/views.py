@@ -14,7 +14,7 @@ class IndexView(mixins.CacheQuerysetMixin, generic.ListView):
     Перегляд для головної сторінки.
     """
     cached_queryset_key = 'services_queryset'
-    cache_time = 30 * 5
+    cache_time = 60 * 5
     queryset = services_models.SocialNetwork.objects
     ordering = 'id'
     template_name = 'index.html'
@@ -25,7 +25,7 @@ class ServiceCategoryView(mixins.CacheQuerysetMixin, generic.ListView):
     Вид для категорії сервісу.
     """
     cached_queryset_key = 'service_categories_queryset'
-    cache_time = 30 * 5
+    cache_time = 60 * 5
     queryset = services_models.Service.objects.select_related('social_network')
     ordering = 'social_network'
     template_name = 'services_category.html'
@@ -36,7 +36,7 @@ class ServiceOrderCreate(LoginRequiredMixin, mixins.CacheQuerysetMixin, generic.
     Вид для створення замовлення.
     """
     cached_queryset_key = 'services_create_order_queryset'
-    cache_time = 30 * 5
+    cache_time = 60 * 5
     queryset = services_models.Service.objects
     form_class = services_forms.OrderForm
     success_url = reverse_lazy('index')
