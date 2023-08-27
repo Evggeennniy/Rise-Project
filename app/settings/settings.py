@@ -196,6 +196,9 @@ AWS_ACCESS_KEY_ID = 'DO0083866TYUQ24MC9FK'
 AWS_SECRET_ACCESS_KEY = 'uw5chEbo3IsMJEgFMolLz9yBFe+uaai7/XRhtDG1ixA'
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 AWS_STORAGE_BUCKET_NAME = 'static'
 AWS_DEFAULT_ACL = 'public-read'
 STATIC_URL = 'https://risestaticfiles.fra1.digitaloceanspaces.com/static/'
+MEDIA_URL = 'https://risestaticfiles.fra1.digitaloceanspaces.com/static/'
