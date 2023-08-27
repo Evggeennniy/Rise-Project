@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-+q640znnpj98b*v+c!66^nl4!$ej_oe66t^*w@50oj(r**5hhj'
 
-CSRF_TRUSTED_ORIGINS = ['https://rise.ua', 'http://rise.ua']
+# CSRF_TRUSTED_ORIGINS = []
 
 DEBUG = False
 
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'debug_toolbar',
+    'storages',
     
     # apps
     'accounts',
@@ -117,11 +118,11 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'rise_server',
-        'USER': 'postgres',
-        'PASSWORD': 'supreme128',
-        'HOST': '10.114.0.4',
-        'PORT': '5432'
+        'NAME': 'defaultdb',
+        'USER': 'doadmin',
+        'PASSWORD': 'AVNS_9yJqs7hR2bHbcIt8aPv',
+        'HOST': 'riseserver-do-user-14570332-0.b.db.ondigitalocean.com',
+        'PORT': '25060'
     },
 }
 
@@ -180,10 +181,21 @@ CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_BEAT_SCHEDULE = {
     'rehadlering_invalid_orders': {
         'task': 'services.tasks.rehadlering_invalid_orders',
-        'schedule': crontab(minute='*/5'),
+        'schedule': crontab(minute='*/10'),
     },
     'checking_completed_orders': {
         'task': 'services.tasks.checking_completed_orders',
         'schedule': crontab(minute='*/15'),
     }
 }
+
+
+AWS_S3_REGION_NAME = 'fra1'
+AWS_S3_ENDPOINT_URL = 'https://risestaticfiles.fra1.digitaloceanspaces.com'
+AWS_ACCESS_KEY_ID = 'DO0083866TYUQ24MC9FK'
+AWS_SECRET_ACCESS_KEY = 'uw5chEbo3IsMJEgFMolLz9yBFe+uaai7/XRhtDG1ixA'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+AWS_STORAGE_BUCKET_NAME = 'static'
+AWS_DEFAULT_ACL = 'public-read'
+STATIC_URL = 'https://risestaticfiles.fra1.digitaloceanspaces.com/static/'
