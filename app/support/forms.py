@@ -11,7 +11,7 @@ class SupportMailForm(forms.ModelForm):
         label='Тема',
         min_length=6,
         max_length=64,
-        help_text='У коротко вкажіть із чим пов\'язана ваша проблема.',
+        help_text='Коротко вкажіть із чим пов\'язана ваша проблема.',
         required=True
     )
     question = forms.CharField(
