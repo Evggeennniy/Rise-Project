@@ -7,11 +7,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-+q640znnpj98b*v+c!66^nl4!$ej_oe66t^*w@50oj(r**5hhj'
 
-# CSRF_TRUSTED_ORIGINS = []
+CSRF_TRUSTED_ORIGINS = ['riseua.online',]
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['riseua.online', 'localhost', '127.0.0.1']
 
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = reverse_lazy('index')
@@ -181,7 +181,7 @@ CELERY_BROKER_URL = 'amqp://localhost'
 CELERY_BEAT_SCHEDULE = {
     'rehadlering_invalid_orders': {
         'task': 'services.tasks.rehadlering_invalid_orders',
-        'schedule': crontab(minute='*/10'),
+        'schedule': crontab(minute='*/15'),
     },
     'checking_completed_orders': {
         'task': 'services.tasks.checking_completed_orders',

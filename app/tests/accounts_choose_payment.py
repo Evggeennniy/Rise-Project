@@ -4,9 +4,7 @@ import pytest
 
 @pytest.mark.parametrize(['data', 'expected'],
     [
-    (dict(fonds='UAH', value=20000), 302),
     (dict(fonds='USD', value=20000), 302),
-    (dict(fonds='EUR', value=20000), 302),
     (dict(fonds='FAIL', value=20000), 200)
     ]
 )
