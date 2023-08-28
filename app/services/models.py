@@ -46,7 +46,7 @@ class ServiceType(models.Model):
     type = models.CharField(verbose_name='Вид', max_length=32)
     self_to_client = models.CharField(verbose_name='Вiдношення до типу клiентiв',
                                       choices=accounts_choices.CLIENT, max_length=15, default='regular')
-    price_per_1000 = models.PositiveIntegerField(verbose_name='Ціна за тисячу ($)', default=0)
+    price_per_1000 = models.DecimalField(verbose_name='Ціна за тисячу ($)', default=0.0, max_digits=8, decimal_places=2)
 
     self_to_service = models.CharField(verbose_name='Вiдношення до сервiсу',
                                        choices=services_choices.SERVICE, max_length=15, default='wiq')
