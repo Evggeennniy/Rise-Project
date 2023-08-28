@@ -35,21 +35,20 @@
 <script>
 
 function updatePrice() {
-  let countInput = document.getElementById('id_count')
+  let countInput = document.getElementById('id_count');
   let selectInput = document.getElementById('id_service_type');
   let selectedOption = selectInput.options[selectInput.selectedIndex];
-  let priceOption = parseInt(selectedOption.textContent.replace(/\D/g, ''));
-  let priceOutput = document.getElementById('id_price')
+  let priceOption = parseFloat(selectedOption.textContent.match(/[\d.]+/));
+  let priceOutput = document.getElementById('id_price');
 
-  let OutPut = countInput.value * (priceOption / 1000 )
-  let RoundedOutPut = parseFloat(OutPut.toFixed(2));
+  let Output = countInput.value * (priceOption / 1000);
+  let RoundedOutput = parseFloat(Output.toFixed(2));
 
-  if (isNaN(OutPut)) {
+  if (isNaN(Output)) {
     priceOutput.textContent = 0;
   } else {
-    priceOutput.value = RoundedOutPut
+    priceOutput.value = RoundedOutput;
   }
-  
 }
 
 const countInput = document.getElementById('id_count');
