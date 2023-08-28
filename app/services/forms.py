@@ -79,6 +79,6 @@ class OrderForm(forms.ModelForm):
         instance = super().save(commit)
 
         # Відправлення на обробку.
-        # service_tasks.handlering_order.delay(instance.id)
+        service_tasks.handlering_order.delay(instance.id)
 
         return instance

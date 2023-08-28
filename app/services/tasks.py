@@ -15,7 +15,7 @@ SERVICE_CLIENTS = {
 def handlering_order(order_id):
     # Збір даних про замовлення.
     order = services_models.Order.objects.get(id=order_id)
-    self_to = order.service_type.get_self_to_display()
+    self_to = order.service_type.get_self_to_service_display()
     service_id = order.service_type.service_id
     quantity = order.count
     link = order.url
@@ -66,7 +66,7 @@ def checking_completed_orders():
 
     if processing_orders:
         for order in processing_orders:
-            self_to = order.service_type.get_self_to_display()
+            self_to = order.service_type.get_self_to_service_display()
             execution_client = SERVICE_CLIENTS.get(self_to)
             order_id = order.order_id
 
