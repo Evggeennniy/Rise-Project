@@ -36,7 +36,7 @@ LIQPAY_PRIVATE_KEY = 'sandbox_K7Mlrs8wcb5Meoa39wQAn0knsEXyZJbXPnBv4aa3'
 
 # WiQ Api
 WIQ_API_URL = 'https://wiq.ru/api/'
-WIQ_API_KEY = '204129a74754fc8c0c6185b4f2062833'
+WIQ_API_KEY = 'a37502755bcf12331f1b957cdb420ad3'
 
 # GlobalSmm Api
 GLOBALSMM_API_URL = 'https://global-smm.com/api/v2/'
