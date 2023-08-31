@@ -71,7 +71,10 @@ def checking_completed_orders():
             order_id = order.order_id
 
             order_data = execution_client.get_status(order_id)
-            status = order_data.get('status')
+            try:
+                status = order_data.get('status')
+            except AttributeError:
+                print('AtrEr with {order_id} and agrs {order_data}')
 
             if status == 'completed':
                 order.status = 2
@@ -80,4 +83,3 @@ def checking_completed_orders():
 
         return f'Выполнена проверка {len(processing_orders)} заказa(ов).'
     return 'Заказов в обработке не обнаружено.'
-    

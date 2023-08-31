@@ -48,7 +48,6 @@ class WiQApiClient(ApiClient):
         order_id = response.get('order', False)
         error = response.get('Error', False)
 
-        print(f'create order : {response} - WIQ')
         if order_id:
             response['success'] = True
             return response
@@ -71,7 +70,6 @@ class WiQApiClient(ApiClient):
         response = self.get_response(self.url, params=params)
         status = response.get('status', False)
 
-        print(f'create order : {response} - WIQ')
         if status == 'Processing' or status == 'In progress':
             return dict(status='processing')
         elif status == 'Completed':
@@ -95,7 +93,6 @@ class GlobalApiClient(ApiClient):
         order_id = response.get('order', False)
         error = response.get('error', False)
 
-        print(f'create order : {response} - GLOBALSMM')
         if order_id:
             response['success'] = True
             return response
@@ -118,7 +115,6 @@ class GlobalApiClient(ApiClient):
         response = self.get_response(self.url, params=params)
         status = response.get('status', False)
 
-        print(f'status check : {response} - GLOBALSMM')
         if status == 'Partial' or status == 'In progress':
             return dict(status='processing')
         elif status == 'Completed':
