@@ -69,9 +69,9 @@ class ServiceTypesAdmin(admin.ModelAdmin):
 
     # Поля за якими буде здійснюватися пошук.
     search_fields = (
-        'service_type',
         'type',
-        'self_to',
+        'self_to_client',
+        'self_to_service',
         'service_id'
     )
 
@@ -100,10 +100,8 @@ class OrdersAdmin(admin.ModelAdmin):
 
     # Поля за якими буде здійснюватися пошук.
     search_fields = (
-        'client_id',
-        'client_username',
-        'service_id',
-        'order_id'
+        'order_id',
+        'price',
     )
 
     # Поля лише для читання.

@@ -59,6 +59,7 @@ class WiQApiClient(ApiClient):
             return dict(order='id_error')
         else:
             response['success'] = False
+            print(f'NewErrCreate with {error} WIQ')
             return dict(order='unknown_error')
 
     def get_status(self, order_id) -> dict:
@@ -74,6 +75,8 @@ class WiQApiClient(ApiClient):
             return dict(status='processing')
         elif status == 'Completed':
             return dict(status='completed')
+        else:
+            print(f'NewErrStatus with {status} WIQ')
 
 
 class GlobalApiClient(ApiClient):
@@ -104,6 +107,7 @@ class GlobalApiClient(ApiClient):
             return dict(order='id_error')
         else:
             response['success'] = False
+            print(f'NewErrCreate with {error} GLOBAL')
             return dict(order='unknown_error')
 
     def get_status(self, order_id):
@@ -119,6 +123,10 @@ class GlobalApiClient(ApiClient):
             return dict(status='processing')
         elif status == 'Completed':
             return dict(status='completed')
+        elif status == 'Canceled':
+            return dict(status='canceled')
+        else:
+            print(f'NewErrStatus with {order_id}: {status} GLOBAL')
 
     # def get_multiple_status(self, *order_ids) -> dict:
     #     data_of_orders = dict()

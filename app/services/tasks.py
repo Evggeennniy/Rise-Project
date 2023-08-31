@@ -55,7 +55,7 @@ def rehadlering_invalid_orders():
             order.status = 1
             order.save()
             handlering_order.delay(order.id)
-            time.sleep(3)
+            time.sleep(2)
         return f'На повторную обработку отправлено {quantity_of_invalid_order} заказ(a-ов).'
     return 'Инвалидных заказов не обнаружено.'
 
@@ -71,15 +71,15 @@ def checking_completed_orders():
             order_id = order.order_id
 
             order_data = execution_client.get_status(order_id)
-            try:
-                status = order_data.get('status')
-            except AttributeError:
-                print(f'AtrEr with {order_id} and agrs {order_data}')
+            status = order_data.get('status')
 
             if status == 'completed':
                 order.status = 2
                 order.save()
-            time.sleep(3)
+            elif status == 'canceled':
+                order.status = 6
+                order.save()
+            time.sleep(2)
 
         return f'Выполнена проверка {len(processing_orders)} заказa(ов).'
     return 'Заказов в обработке не обнаружено.'
