@@ -74,7 +74,7 @@ def checking_completed_orders():
             try:
                 status = order_data.get('status')
             except AttributeError:
-                print('AtrEr with {order_id} and agrs {order_data}')
+                print(f'AtrEr with {order_id} and agrs {order_data}')
 
             if status == 'completed':
                 order.status = 2
