@@ -79,6 +79,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    
+    'services.middleware.HostHeaderCheckMiddleware'
 ]
 
 ROOT_URLCONF = 'settings.urls'

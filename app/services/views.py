@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from typing import Any
+from typing import Any, Dict
 from django.urls import reverse_lazy
 from django.views import generic
 from services import models as services_models
@@ -49,7 +49,7 @@ class ServiceOrderCreate(LoginRequiredMixin, mixins.CacheQuerysetMixin, generic.
     cache_time = 60 * 5
     queryset = services_models.Service.objects
     form_class = services_forms.OrderForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('order_created')
     template_name = "createserviceorder.html"
 
     def get_form_kwargs(self):
@@ -65,5 +65,11 @@ class ServiceOrderCreate(LoginRequiredMixin, mixins.CacheQuerysetMixin, generic.
         return kwargs
 
 
-# class OrderCreatedSuccessfulView(generic.DetailView):
-#     template_name = 'order_created.html'
+class OrderCreatedSuccessfulView(generic.TemplateView):
+    template_name = 'order_created.html'
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        last_order = services_models.Order.objects.filter(client__id=self.request.user.id)
+        context['last_order'] = last_order.last()
+        return context
