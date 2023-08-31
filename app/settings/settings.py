@@ -7,11 +7,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-+q640znnpj98b*v+c!66^nl4!$ej_oe66t^*w@50oj(r**5hhj'
 
-CSRF_TRUSTED_ORIGINS = ['http://riseua.online', 'http://161.35.216.180']
+CSRF_TRUSTED_ORIGINS = ['http://riseua.online',]
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['riseua.online', 'localhost', '127.0.0.1', '161.35.216.180']
+ALLOWED_HOSTS = ['riseua.online', 'localhost', '127.0.0.1']
 
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = reverse_lazy('index')

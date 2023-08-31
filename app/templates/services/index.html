@@ -74,7 +74,7 @@
 
         {% for obj in object_list %}
         {% if obj.is_active %}
-        <a href="{% url 'services_category' %}" class="service_link nav-link">
+        <a href="{% url 'services_category' obj.id %}" class="service_link nav-link">
             <div class="col d-flex align-items-start service">
                 <div class="icon-square text-dark flex-shrink-0 me-3">
                     <img src="{{ obj.logo.url }}"

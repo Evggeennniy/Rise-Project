@@ -1,4 +1,5 @@
 # from django.shortcuts import render
+from typing import Any
 from django.urls import reverse_lazy
 from django.views import generic
 from services import models as services_models
@@ -13,6 +14,7 @@ class IndexView(mixins.CacheQuerysetMixin, generic.ListView):
     """
     Перегляд для головної сторінки.
     """
+
     cached_queryset_key = 'services_queryset'
     cache_time = 60 * 5
     queryset = services_models.SocialNetwork.objects
@@ -24,11 +26,19 @@ class ServiceCategoryView(mixins.CacheQuerysetMixin, generic.ListView):
     """
     Вид для категорії сервісу.
     """
+
     cached_queryset_key = 'service_categories_queryset'
     cache_time = 60 * 5
     queryset = services_models.Service.objects.select_related('social_network')
     ordering = 'social_network'
     template_name = 'services_category.html'
+
+    def get_queryset(self):
+        category = self.kwargs.get('pk', False)
+        queryset = super().get_queryset()
+        if category:
+            queryset = queryset.filter(social_network=category)
+        return queryset
 
 
 class ServiceOrderCreate(LoginRequiredMixin, mixins.CacheQuerysetMixin, generic.CreateView):
@@ -49,7 +59,11 @@ class ServiceOrderCreate(LoginRequiredMixin, mixins.CacheQuerysetMixin, generic.
         kwargs['client_id'] = self.request.user.id
         kwargs['service_id'] = service_id
         kwargs['min_count'] = services_models.Service.objects.get(id=service_id).min_count
-        
+
         kwargs['client_type'] = self.request.user.profile_status
 
         return kwargs
+
+
+# class OrderCreatedSuccessfulView(generic.DetailView):
+#     template_name = 'order_created.html'
