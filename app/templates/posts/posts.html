@@ -25,11 +25,11 @@
     transition: opacity 1s ease-out, transform 1s ease-out;
   }
   .fade-left.active {
-    opacity: 1;
+    opacity: 0.9;
     transform: translateX(0);
   }
   .fade-in.active { 
-    opacity: 1;
+    opacity: 0.9;
     transform: translateY(0); /* Блок появляется плавно смещаясь вверх */
   }
   .description_text {
@@ -52,7 +52,7 @@
     {% for obj in object_list %}
     <div class="col-md-6">
       <div
-        class="block animated_block fade-in shadow-lg row bg g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        class="block animated_block fade-in shadow-lg row bg g-0 border">
         <div class="col p-4 d-flex flex-column position-static">
           <!-- <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong> -->
           <h2 class="pb-2 border-bottom">{{ obj.header }}</h2>

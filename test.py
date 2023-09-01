@@ -1,19 +1,9 @@
-from forex_python.converter import CurrencyRates
+from app.services.utils import GlobalApiClient
 
-class CurrencyConverter:
-    def __init__(self):
-        self.currency_rates = CurrencyRates()
 
-    def convert(self, amount, from_currency, to_currency):
-        converted_amount = self.currency_rates.convert(from_currency, to_currency, amount)
-        return converted_amount
+GLOBALSMM_API_URL = 'https://global-smm.com/api/v2/'
+GLOBALSMM_API_KEY = 'b3e9a678aca8c3657dd23ef40572368e'
 
-if __name__ == "__main__":
-    converter = CurrencyConverter()
-
-    amount = 1
-    from_currency = "USD"
-    to_currency = "UAH"
-
-    converted_amount = converter.convert(amount, from_currency, to_currency)
-    print(f"{amount} {from_currency} is equal to {converted_amount} {to_currency}")
+client = GlobalApiClient(GLOBALSMM_API_URL, GLOBALSMM_API_KEY)
+status = client.get_status(22459555)
+print(status)

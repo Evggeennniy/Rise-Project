@@ -29,7 +29,7 @@
             
         }
         .block {
-            background-image: url('{% static "blocks_background.png" %}');
+            background-image: url('{% static "blocks_background2.jpg" %}');
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
@@ -37,9 +37,15 @@
         .border_radius20 {
             border-radius: 20px;
         }
+        .opacity8 {
+            opacity: 0.8;
+        }
+        .content_box {
+            padding-top: 100px;
+        }
     </style>
 
-    <div class="py-5">
+    <div class="content_box ">
         {% include 'nuvbar.html' %}
 
         {% block content %}

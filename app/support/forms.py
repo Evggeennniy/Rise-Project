@@ -15,7 +15,7 @@ class SupportMailForm(forms.ModelForm):
         required=True
     )
     question = forms.CharField(
-        label='Описание',
+        label='Опис',
         min_length=30,
         max_length=256,
         help_text='Опишіть, що вас цікавить.',

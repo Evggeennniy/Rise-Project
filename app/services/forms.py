@@ -59,26 +59,26 @@ class OrderForm(forms.ModelForm):
         if not self.errors:
             if cleaned_data['count'] < self.min_count:
                 raise forms.ValidationError(f'Мінімальна кількість для цієї послуги {self.min_count}')
-            
-            user = account_models.User.objects.get(id=self.client_id)
-            price_of_order = cleaned_data['price']
 
-            if not user.enough_balance(price_of_order) :
-                raise forms.ValidationError('Недостатній баланс!')
+            # user = account_models.User.objects.get(id=self.client_id)
+            # price_of_order = cleaned_data['price']
+
+            # if not user.enough_balance(price_of_order) :
+            #     raise forms.ValidationError('Недостатній баланс!')
             
-            user.balance -= price_of_order
-            user.save()
+            # user.balance -= price_of_order
+            # user.save()
 
         return cleaned_data
 
     # Збереження у основу.
     def save(self, commit=True):
         instance = super().save(commit=False)
-        instance.__dict__['client_id'] = self.client_id
-        instance.__dict__['service_id'] = self.service_id
-        instance = super().save(commit)
+        # instance.__dict__['client_id'] = self.client_id
+        # instance.__dict__['service_id'] = self.service_id
+        # instance = super().save(commit)
 
         # Відправлення на обробку.
-        service_tasks.handlering_order.delay(instance.id)
-
+        # service_tasks.handlering_order.delay(instance.id)
+        
         return instance
