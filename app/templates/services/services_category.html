@@ -46,67 +46,74 @@
     }
 </style>
 
-<div class="container px-4 py-5" id="custom-cards">
-    <div id="" class="d-flex justify-content-around align-items-center">
-        <h2 class="pb-2 border-bottom">Виберіть послугу</h2>
-    </div>
+<main>
+    <div class="container px-4 py-5" id="custom-cards">
+        <div id class="d-flex justify-content-around align-items-center">
+            <h2 class="pb-2 border-bottom">Виберіть послугу</h2>
+        </div>
 
-    {% if object_list %}
-    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-        {% for obj in object_list %}
-        <div class="col service_block">
-            <div
-                class="item fade-right shadow-lg block border_radius20">
-
+        {% if object_list %}
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+            {% for obj in object_list %}
+            <div class="col service_block">
                 <div
-                    class="d-flex flex-column h-100 p-5 pb-3 text-black text-shadow-1">
-                    <a href="{% url 'create_service_order' obj.id %}" class="block_link nav-link">
-                        <img src="{% static 'logo_black.png' %}"
-                            alt="logo"
-                            class
-                            width="32" height="32">
+                    class="item fade-right shadow-lg block border_radius20">
 
-                        <div class="logo_block"><img
-                                src="{{ obj.service_logo.url }}"
-                                class="logo_image" alt></div>
+                    <div
+                        class="d-flex flex-column h-100 p-5 pb-3 text-black text-shadow-1">
+                        <a href="{% url 'create_service_order' obj.id %}"
+                            class="block_link nav-link">
+                            <img src="{% static 'logo_black.png' %}"
+                                alt="logo"
+                                class
+                                width="32" height="32">
 
-                        {% if obj.social_network.is_active %}
-                        <div class="services_desc">
-                            <ul>
-                                <li>
-                                    <strong>
-                                        {{ obj.service_name }}
-                                    </strong>
-                                </li>
-                                <li>
-                                    <strong>
-                                        Мін. кількість: {{ obj.min_count }}
-                                    </strong>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                        {% else %}
-                        <div class="services_desc">
-                            <strong class="text-muted">
-                                Інформація по цій соц мережі, буде відома по її
-                                відкриттю
-                            </strong>
-                        </div>
-                        {% endif %}
-                    </a>
+                            <div class="logo_block"><img
+                                    src="{{ obj.service_logo.url }}"
+                                    class="logo_image" alt></div>
+
+                            {% if obj.social_network.is_active %}
+                            <div class="services_desc">
+                                <ul>
+                                    <li>
+                                        <strong>
+                                            {{ obj.service_name }}
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <strong>
+                                            Мін. кількість: {{ obj.min_count }}
+                                        </strong>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            {% else %}
+                            <div class="services_desc">
+                                <strong class="text-muted">
+                                    Інформація по цій соц мережі, буде відома по
+                                    її
+                                    відкриттю
+                                </strong>
+                            </div>
+                            {% endif %}
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-        {% else %}
+            {% endfor %}
+            {% else %}
             <div class="item fade-right empty_message col-sm-8 py-5 mx-auto">
-                <h3 class="display-6 fw-normal text-muted">Поки що тут нічого немає.</h3>
-                <strong class="fs-5 text-muted">Може вам варто встати з ліжка та пробігти голим із прапором свого профілю та ситуація покращиться?</strong>
+                <h3 class="display-6 fw-normal text-muted">Поки що тут нічого
+                    немає.</h3>
+                <strong class="fs-5 text-muted">Може вам варто встати з ліжка та
+                    пробігти голим із прапором свого профілю та ситуація
+                    покращиться?</strong>
             </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
-</div>
+</main>
 
 <script>
     const rightItems = document.querySelectorAll('.fade-right');
