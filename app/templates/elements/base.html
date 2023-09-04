@@ -22,13 +22,19 @@
             font-family: 'Trebuchet MS', sans-serif
         }
         #base_block {
-            background-image: url('{% static "background4.jpg" %}');
+            background-image: url('{% static "background5.jpg" %}');
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
             height: 100%;
-            
+	    possition: relative;
         }
+	@media (max-width: 767px) {
+	  block_block {
+	    background-image: url('{% static "background_smartphone.jpg" %}');
+	    background-size: auto;
+	    }
+	}
         .block {
             background-image: url('{% static "blocks_background2.jpg" %}');
             background-repeat: no-repeat;
@@ -44,6 +50,7 @@
         .content_box {
             padding-top: 100px;
         }
+
     </style>
 
     <div class="content_box ">
