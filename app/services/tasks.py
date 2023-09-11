@@ -71,8 +71,11 @@ def checking_completed_orders():
             order_id = order.order_id
 
             order_data = execution_client.get_status(order_id)
-            status = order_data.get('status')
-
+            try:
+                status = order_data.get('status')
+            except AttributeError:
+                continue
+            
             if status == 'completed':
                 order.status = 2
                 order.save()

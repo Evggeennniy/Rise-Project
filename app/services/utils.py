@@ -76,7 +76,7 @@ class WiQApiClient(ApiClient):
         elif status == 'Completed':
             return dict(status='completed')
         else:
-            print(f'NewErrStatus with {status} WIQ')
+            print(f'NewErrStatus with {order_id}: {status} WIQ')
 
 
 class GlobalApiClient(ApiClient):
