@@ -11,7 +11,7 @@ class User(AbstractUser):
     # REQUIRED_FIELDS = ('email',)
 
     username = models.CharField(verbose_name='Нікнейм', max_length=35, unique=True, null=False)
-    email = models.CharField(verbose_name='Пошта', max_length=128, unique=True, null=False)
+    email = models.CharField(verbose_name='Пошта', max_length=128, unique=False, null=False)
 
     profile_status = models.CharField(verbose_name='Cтатус профiля',
                                       choices=account_choises.CLIENT, max_length=15, default='regular')
