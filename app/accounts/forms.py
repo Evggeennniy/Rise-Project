@@ -18,19 +18,19 @@ class SignUpForm(forms.ModelForm):
         min_length=6,
         max_length=35
     )
-    email = forms.CharField(
-        label='Пошта',
-        min_length=8,
-        max_length=128
-    )
+    # email = forms.CharField(
+    #     label='Пошта',
+    #     min_length=8,
+    #     max_length=128
+    # )
     password = forms.CharField(
-        label='Пароль',
+        label='Cтворiть пароль',
         min_length=6,
         max_length=35,
         widget=forms.PasswordInput
     )
     confirm_password = forms.CharField(
-        label='Повторно пароль',
+        label='Повторiть пароль',
         min_length=6,
         max_length=35,
         widget=forms.PasswordInput
@@ -41,7 +41,6 @@ class SignUpForm(forms.ModelForm):
         model = get_user_model()
         fields = (
             'username',
-            'email',
 
             'password',
             'confirm_password',

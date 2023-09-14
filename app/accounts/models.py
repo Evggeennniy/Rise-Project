@@ -8,11 +8,11 @@ class User(AbstractUser):
     База даних для користувачів
     """
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ('email',)
+    # REQUIRED_FIELDS = ('email',)
 
     username = models.CharField(verbose_name='Нікнейм', max_length=35, unique=True, null=False)
     email = models.CharField(verbose_name='Пошта', max_length=128, unique=True, null=False)
-    
+
     profile_status = models.CharField(verbose_name='Cтатус профiля',
                                       choices=account_choises.CLIENT, max_length=15, default='regular')
 

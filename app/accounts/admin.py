@@ -10,7 +10,6 @@ class UsersAdmin(admin.ModelAdmin):
 
     # Поля виведення загального списку.
     list_display = (
-        'email',
         'username',
         'profile_status',
         'balance',
