@@ -1,5 +1,6 @@
 # from django.shortcuts import render
 from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views import generic
 from services import models as services_models
@@ -73,3 +74,13 @@ class OrderCreatedSuccessfulView(generic.TemplateView):
         last_order = services_models.Order.objects.filter(client__id=self.request.user.id)
         context['last_order'] = last_order.last()
         return context
+
+
+class MyOrdersView(LoginRequiredMixin, generic.ListView):
+    queryset = services_models.Order.objects
+    ordering = 'id'
+    template_name = 'orders_history.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(client_id=self.request.user.id).select_related('client', 'service')

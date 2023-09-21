@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    .history_body {
+        border-radius: 20px;
+        min-height: 500px;
+    }
+    .order_image {
+        max-height: 50px;
+    }
+    .big_block {
+        padding: 5px;
+        margin: 5px;
+
+        opacity: 0.8;
+
+        background-color: aliceblue;
+        border-radius: 10px;
+        width: 70%;
+    }
+    .central_content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .small_block {
+        padding: 0px;
+        margin: 5px;
+
+        opacity: 0.8;
+
+        background-color: aliceblue;
+        border-radius: 10px;
+        width: 30%;
+    }
+</style>
+
+<main class="container col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="history_body">
+        <div class>
+            <small class="d-block text-end">
+                <a>Кiлькiсть: {{ object_list.count }}</a>
+            </small>
+            <h6 class="pb-2 mb-0">Iсторiя</h6>
+
+        </div>
+
+        {% if object_list %}
+        {% for obj in object_list %}
+        <div class="d-flex">
+            <div class="order_body shadow-lg big_block central_content">
+                <strong class="text-center description">
+                    {{ obj.service.social_network }}
+                    {{ obj.service.service_name }} x
+                    {{ obj.count }}
+                    <br>
+                    <strong class="text-muted">{{ obj.get_status_display }}</strong>
+                </strong>
+
+            </div>
+            <div class="order_body shadow-lg small_block central_content">
+                <strong class=" text-muted">
+                    Цiна {{ obj.price }} $</strong>
+            </div>
+        </div>
+
+        <div>
+            <small class="d-block text-end mt-3">
+                <p></p>
+            </small>
+        </div>
+        {% endfor %}
+
+        {% else %}
+        <div class="px-4 pt-5 my-5 text-center">
+            <h1 class="display-4 fw-bold">Хелло!</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">Тут зберігатимуться ваші зареєстровані
+                    замовлення та їх статуси.</p>
+            </div>
+            <div class="overflow-hidden" style="max-height: 30vh;">
+                <div class="container px-5">
+                    <img src="{% static 'orders_history.png' %}"
+                        class="img-fluid border rounded-3 shadow-lg mb-4"
+                        alt="Example image" loading="lazy" width="700"
+                        height="500">
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</main>
+{% endblock content %}

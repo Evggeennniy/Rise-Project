@@ -80,7 +80,7 @@ MIDDLEWARE = [
     
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     
-    'services.middleware.HostHeaderCheckMiddleware'
+    # 'services.middleware.HostHeaderCheckMiddleware'
 ]
 
 ROOT_URLCONF = 'settings.urls'

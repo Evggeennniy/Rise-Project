@@ -38,6 +38,8 @@
         <li><a href="{% url 'support_mails' %}" class="nav-link px-2 nav_link">Підтримка</a></li>
         <li><a href="{% url 'posts' %}" class="nav-link px-2 nav_link">Пости</a></li>
         <li><a href="{% url 'comments' %}" class="nav-link px-2 nav_link">Відгуки</a></li>
+        <li><a href="{% url 'orders_history' %}" class="nav-link px-2 nav_link">Замовлення</a></li>
+
       </ul>
       {% if request.user.is_authenticated %}
       <div class="text-center">
