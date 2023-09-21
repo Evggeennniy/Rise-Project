@@ -78,7 +78,8 @@ class OrderCreatedSuccessfulView(generic.TemplateView):
 
 class MyOrdersView(LoginRequiredMixin, generic.ListView):
     queryset = services_models.Order.objects
-    ordering = 'id'
+    paginate_by = 15
+    ordering = '-id'
     template_name = 'orders_history.html'
 
     def get_queryset(self):

@@ -1,39 +1,44 @@
 <style>
-        .page-link {
-                height: 100%;
-        }
-        .page-item {
-                padding-left: 0.2%;
-                padding-right: 0.2%;
-        }
-        .page-link:hover {
-                box-shadow: 5px 5px 5px 5px grey;
+        .page_link {
+                margin: 5px;
+                border-radius: 20pc;
+                opacity: 0.6;
+                text-decoration: none;
+                color: black;
+                background-color: aliceblue;
+                padding: 10px;
         }
 </style>
-
 
 <div>
         <ul class="pagination justify-content-center">
                 {% if page_obj.has_previous %}
-                        <li class="page-item"><a class="page-link text-dark" href="?page=1&{{ filter_params }}">В начало</a></li>
-                        <li class="page-item"><a class="page-link text-dark" href="?page={{ page_obj.previous_page_number }}&{{ filter_params }}">Назад</a></li>
+                <li class><a class="page_link text-dark"
+                                href="?page=1&{{ filter_params }}">На початок</a></li>
+                <li class><a class="page_link text-dark"
+                                href="?page={{ page_obj.previous_page_number }}&{{ filter_params }}">Назад</a></li>
                 {% else %}
-                        <li class="page-item disabled"><a class="page-link">В начало</a></li>
-                        <li class="page-item disabled"><a class="page-link">Назад</a></li>
+                <li class=" disabled"><a class="page_link">На початок</a></li>
+                <li class=" disabled"><a class="page_link">Назад</a></li>
                 {% endif %}
 
-                <button class="btn btn-sm disabled ">
-                        <a class="nav-link px-2 text-dark "> {{ page_obj.number }} из {{ page_obj.paginator.num_pages }} </a>
+                <button class="btn btn-sm disabled">
+                        <a class="nav-link px-2 text-dark ">
+                                {{ page_obj.number }} из
+                                {{ page_obj.paginator.num_pages }} </a>
                 </button>
 
                 {% if page_obj.has_next %}
-                        <li class="page-item"><a class="page-link text-dark" href="?page={{ page_obj.next_page_number }}&{{ filter_params }}">Вперед</a></li>
-                        <li class="page-item"><a class="page-link text-dark" href="?page={{ page_obj.paginator.num_pages }}&{{ filter_params }}">В конец</a></li>
+                <li class><a class="page_link text-dark"
+                                href="?page={{ page_obj.next_page_number }}&{{ filter_params }}">Вперед</a></li>
+                <li class><a class="page_link text-dark"
+                                href="?page={{ page_obj.paginator.num_pages }}&{{ filter_params }}">
+                                В кiнець</a></li>
                 {% else %}
-                        <li class="page-item disabled"><a class="page-link">Вперед</a></li>
-                        <li class="page-item disabled"><a class="page-link">В конец</a></li>
+                <li class=" disabled"><a class="page_link">Вперед</a></li>
+                <li class=" disabled"><a class="page_link">В кiнець</a></li>
                 {% endif %}
 
-        </ul> 
+        </ul>
 
 </div>
