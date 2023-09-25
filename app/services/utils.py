@@ -71,7 +71,7 @@ class WiQApiClient(ApiClient):
         response = self.get_response(self.url, params=params)
         status = response.get('status', False)
 
-        if status == 'Processing' or status == 'In progress':
+        if status == 'Processing' or status == 'In progress' or status == 'Pending':
             return dict(status='processing')
         elif status == 'Completed':
             return dict(status='completed')
@@ -119,7 +119,7 @@ class GlobalApiClient(ApiClient):
         response = self.get_response(self.url, params=params)
         status = response.get('status', False)
 
-        if status == 'Partial' or status == 'In progress':
+        if status == 'Partial' or status == 'In progress' or status == 'Proccessing' or status == 'Pending':
             return dict(status='processing')
         elif status == 'Completed':
             return dict(status='completed')
