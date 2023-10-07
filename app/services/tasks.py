@@ -47,13 +47,11 @@ def handlering_order(order_id):
 
 @shared_task
 def rehadlering_invalid_orders():
-    invalid_orders = services_models.Order.objects.filter(status=3)
+    invalid_orders = services_models.Order.objects.filter(status='balance_error')
     quantity_of_invalid_order = len(invalid_orders)
 
     if quantity_of_invalid_order:
         for order in invalid_orders:
-            order.status = 1
-            order.save()
             handlering_order.delay(order.id)
             time.sleep(2)
         return f'На повторную обработку отправлено {quantity_of_invalid_order} заказ(a-ов).'
@@ -62,7 +60,7 @@ def rehadlering_invalid_orders():
 
 @shared_task
 def checking_completed_orders():
-    processing_orders = services_models.Order.objects.filter(status=1)
+    processing_orders = services_models.Order.objects.filter(status='processing')
 
     if processing_orders:
         for order in processing_orders:

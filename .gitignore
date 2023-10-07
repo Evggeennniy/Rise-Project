@@ -1,6 +1,7 @@
 __pycache__
 migrations/
-celerybeat-schedule
+app/celerybeat-schedule
+app/db.sqlite3
 static/
 db.sqlite3
 test.py
