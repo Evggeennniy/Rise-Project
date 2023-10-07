@@ -22,7 +22,7 @@ class ServicesCategoryAdmin(admin.ModelAdmin):
 
     # Поля лише для читання.
     readonly_fields = (
-        
+
     )
 
 
@@ -47,7 +47,7 @@ class ServicesAdmin(admin.ModelAdmin):
 
     # Поля лише для читання.
     readonly_fields = (
-        
+
     )
 
 
@@ -77,7 +77,7 @@ class ServiceTypesAdmin(admin.ModelAdmin):
 
     # Поля лише для читання.
     readonly_fields = (
-        
+
     )
 
 
@@ -106,7 +106,7 @@ class OrdersAdmin(admin.ModelAdmin):
 
     # Поля лише для читання.
     readonly_fields = (
-        
+
     )
 
 
@@ -119,11 +119,7 @@ class FootersAdmin(admin.ModelAdmin):
     # Поля виведення загального списку.
     list_display = (
         'header',
-        'name_1',
-        'name_2',
-        'name_3',
-        'name_4',
-        'name_5'
+        'url'
     )
 
     # Поля за якими буде здійснюватися пошук.
@@ -133,6 +129,5 @@ class FootersAdmin(admin.ModelAdmin):
 
     # Поля лише для читання.
     readonly_fields = (
-        
-    )
 
+    )

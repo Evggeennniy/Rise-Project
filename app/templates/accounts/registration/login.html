@@ -6,19 +6,11 @@
 
 {% block content %}
 
-<style>
-    .form-signin {
-        text-align: center;
-    }
-    #main_block {
-        padding: 35px;
-    }
-</style>
-
-<div class="container col-lg-3 col-lg-2 px-4 py-5">
-    <form id="main_block" class="shadow-lg block border_radius20 form-signin" method="post">
+<div class="container col-lg-4 col-lg-4 py-5" id="login-block">
+    <form class="shadow-lg border-radius login-form"
+        method="post">
         <img class="mb-4" src="{% static 'logo_black.png' %}" alt width="72"
-            height="72">
+            height="72" class="image">
         <h1 class="h3 mb-3 fw-normal">Будь ласка, війдіть</h1>
 
         {% csrf_token %}
@@ -30,7 +22,11 @@
                     onclick="show_pass_login()"> Показати/Приховати значення
             </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Увійти</button>
+        <button class="btn w-100 btn-lg btn-outline-primary" type="submit">Увійти</button>
+        <h7 class="text-gray sing-up-text">Немає облікового запису? Ви можете
+        </h7>
+        <a class="btn w-100 btn-warning" href="{% url 'sign_up' %}"
+            role="button">Зареєструватися</a>
     </form>
 
     {% endblock content %}

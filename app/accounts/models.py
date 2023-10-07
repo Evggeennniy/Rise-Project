@@ -30,13 +30,11 @@ class Payment(models.Model):
     """
     client = models.ForeignKey(verbose_name='Клiент', to='accounts.User', on_delete=models.CASCADE, null=True)
     value = models.DecimalField(verbose_name='Cума', max_digits=10, decimal_places=2)
-    fonds = models.CharField(verbose_name='Валюта', choices=account_choises.FONDS, default='USD', max_length=5)
+    screenshot = models.ImageField(verbose_name='Cкриншот', upload_to='screenshots', default=None)
     data = models.DateTimeField(verbose_name='Дата', auto_now_add=True, blank=True)
 
-    status = models.CharField(verbose_name='Статус', choices=account_choises.PAYMENT_STATUS, default='created', max_length=15)
-    
     def __str__(self) -> str:
-        return f'Платiж {self.id}, сума {self.value} {self.fonds}, дата {self.data}'
+        return f'Платiж {self.id}, сума {self.value}, дата {self.data}'
 
     class Meta:
         verbose_name = 'Платiж'

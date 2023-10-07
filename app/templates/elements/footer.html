@@ -1,70 +1,16 @@
 {% load static %}
 
-<style>
-    #footer_block {
-        text-align: center;
-    }
-</style>
-
-
-<hr id="footer_hr">
-<footer id="footer_block" class="container py-5">
-    <div class="row">
-      <div class="col-12 col-md">
-        <img src="{% static 'logo_black.png' %}"
-                    alt="logo"
-                    class=""
-                    width="32" height="32">
-        <small class="d-block mb-3 text-body-secondary">© 2023–2024</small>
-      </div>
-
-      {% for object in footer_objects %}
-      
-      <div class="col-6 col-md">
-        <h5>{{ object.header }}</h5>
-        <ul class="list-unstyled text-small text-muted">
-          <li>{{ object.name_1 }}</li>
-          <li>{{ object.name_2 }}</li>
-          <li>{{ object.name_3 }}</li>
-          <li>{{ object.name_5 }}</li>
+<div class="container" id="footer-block">
+    <footer class="py-3 my-4">
+        {% if footer_objects %}
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            {% for obj in footer_objects %}
+            <li class="nav-item"><a href="{{ obj.url }}"
+                    class="nav-link px-2 text-body-secondary" target="_blank">
+                    {{ obj.header }}</a></li>
+            {% endfor %}
         </ul>
-      </div>
-
-      {% endfor %}
-
-    </div>
-  </footer>
-
-
-  <!-- {% load static %}
-
-  <style>
-      #footer_block {
-          text-align: center;
-      }
-  </style>
-  
-  <hr id="footer_hr">
-  <footer id="footer_block" class="container py-5">
-      <div class="row">
-        <div class="col-12 col-md">
-          <img src="{% static 'logo_black.png' %}"
-                      alt="logo"
-                      class=""
-                      width="32" height="32">
-          <small class="d-block mb-3 text-body-secondary">© 2023–2024</small>
-        </div>
-        {% for object in footers %}
-        <div class="col-6 col-md">
-          <h5>{{ object.header }}</h5>
-          <ul class="list-unstyled text-small text-muted">
-            <li>{{ object.link_1 }}</li>
-            <li>{{ object.link_2 }}</li>
-            <li>{{ object.link_3 }}</li>
-            <li>{{ object.link_4 }}</li>
-            <li>{{ object.link_5 }}</li>
-          </ul>
-        </div>
-        {% endfor %}
-      </div>
-    </footer> -->
+        {% endif %}
+        <p class="text-center text-body-secondary">© 2023-2024 Rise Company</p>
+    </footer>
+</div>

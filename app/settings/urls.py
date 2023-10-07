@@ -17,10 +17,9 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('services/', include('services.urls')),
     path('support/', include('support.urls')),
-    
+
     path('', services_views.IndexView.as_view(), name='index')
 ]
-
 
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

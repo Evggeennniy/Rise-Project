@@ -26,7 +26,7 @@ class UsersAdmin(admin.ModelAdmin):
 
     # Поля лише для читання.
     readonly_fields = (
-        
+
     )
 
 
@@ -39,11 +39,9 @@ class PaymentsAdmin(admin.ModelAdmin):
     # Поля виведення загального списку.
     list_display = (
         'client',
-        'id',
         'value',
-        'fonds',
         'data',
-        'status'
+        'id'
     )
 
     # Поля за якими буде здійснюватися пошук.
@@ -51,12 +49,10 @@ class PaymentsAdmin(admin.ModelAdmin):
         'id',
         'client',
         'value',
-        'fonds',
         'data',
-        'status'
     )
 
     # Поля лише для читання.
     readonly_fields = (
-        
+
     )
