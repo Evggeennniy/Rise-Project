@@ -89,11 +89,7 @@ class Footer(models.Model):
     База даних для футера.
     """
     header = models.CharField(verbose_name='Заголовок', max_length=32)
-    name_1 = models.CharField(verbose_name='Назва 1', max_length=64)
-    name_2 = models.CharField(verbose_name='Назва 2', max_length=64)
-    name_3 = models.CharField(verbose_name='Назва 3', max_length=64, blank=True)
-    name_4 = models.CharField(verbose_name='Назва 4', max_length=64, blank=True)
-    name_5 = models.CharField(verbose_name='Назва 5', max_length=64, blank=True)
+    url = models.CharField(verbose_name='Посилання', max_length=128, default='#')
 
     def __str__(self) -> str:
         return self.header

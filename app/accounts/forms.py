@@ -66,7 +66,7 @@ class SignUpForm(forms.ModelForm):
         return instance
 
 
-class ChoosePaymentForm(forms.ModelForm):
+class CreatePaymentForm(forms.ModelForm):
     """
     Форма для вибору варианту плати.
     """
@@ -81,9 +81,9 @@ class ChoosePaymentForm(forms.ModelForm):
         model = account_models.Payment
         fields = (
             'value',
-            'fonds'
+            'screenshot'
         )
-        
+
         # Збереження у основу.
     def save(self, commit=True):
         instance = super().save(commit=False)

@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from app_utils import mixins
 
 
-class IndexView(mixins.CacheQuerysetMixin, generic.ListView):
+class IndexView(generic.ListView):
     """
     Перегляд для головної сторінки.
     """
@@ -23,7 +23,7 @@ class IndexView(mixins.CacheQuerysetMixin, generic.ListView):
     template_name = 'index.html'
 
 
-class ServiceCategoryView(mixins.CacheQuerysetMixin, generic.ListView):
+class ServiceCategoryView(generic.ListView):
     """
     Вид для категорії сервісу.
     """
@@ -42,7 +42,7 @@ class ServiceCategoryView(mixins.CacheQuerysetMixin, generic.ListView):
         return queryset
 
 
-class ServiceOrderCreate(LoginRequiredMixin, mixins.CacheQuerysetMixin, generic.CreateView):
+class ServiceOrderCreate(LoginRequiredMixin, generic.CreateView):
     """
     Вид для створення замовлення.
     """

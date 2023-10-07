@@ -50,14 +50,14 @@ class UserCreateSuccesfull(generic.TemplateView):
     template_name = 'user_successfully_created.html'
 
 
-class ChoosePaymentView(LoginRequiredMixin, generic.CreateView):
+class CreatePaymentView(LoginRequiredMixin, generic.CreateView):
     """
-    Вигляд до вибору платежу.
+    Вигляд до платежу.
     """
     queryset = account_models.Payment
-    form_class = account_forms.ChoosePaymentForm
-    success_url = reverse_lazy('paypal')
-    template_name = 'choosepayment.html'
+    form_class = account_forms.CreatePaymentForm
+    success_url = reverse_lazy('index')
+    template_name = 'create_payment.html'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -70,9 +70,9 @@ class PayPalView(LoginRequiredMixin, generic.TemplateView):
     Вигляд до плати на paypal вiджети.
     """
     api = paypalrestsdk.configure({
-    "mode": "sandbox",
-    "client_id": PAYPAL_CLIENT_ID,
-    "client_secret": PAYPAL_SECRET_KEY
+        "mode": "sandbox",
+        "client_id": PAYPAL_CLIENT_ID,
+        "client_secret": PAYPAL_SECRET_KEY
     })
     template_name = 'paypal_payment.html'
 
@@ -82,33 +82,33 @@ class PayPalView(LoginRequiredMixin, generic.TemplateView):
         ).last()
 
         paypal_payment = paypalrestsdk.Payment({
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "redirect_urls": {
-            "return_url": request.build_absolute_url(reverse('paypal_callback')),
-            "cancel_url": request.build_absolute_url(reverse('index'))
-        },
-        "transactions": [{
-            "item_list": {
-                "items": [{
-                    "name": "Пополнение баланса",
-                    "sku": "Item SKU",
-                    "price": str(last_payment.value),
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"
+            },
+            "redirect_urls": {
+                "return_url": request.build_absolute_url(reverse('paypal_callback')),
+                "cancel_url": request.build_absolute_url(reverse('index'))
+            },
+            "transactions": [{
+                "item_list": {
+                    "items": [{
+                        "name": "Пополнение баланса",
+                        "sku": "Item SKU",
+                        "price": str(last_payment.value),
+                        "currency": last_payment.fonds,
+                        "quantity": 1
+                    }]
+                },
+                "amount": {
+                    "total": str(last_payment.value),
                     "currency": last_payment.fonds,
-                    "quantity": 1
-                }]
-            },
-            "amount": {
-                "total": str(last_payment.value),
-                "currency": last_payment.fonds,
-            },
-            "description": "Плата на Rise.ua"
-        }]
+                },
+                "description": "Плата на Rise.ua"
+            }]
         }, api=self.api)
 
-        if paypal_payment.create():         
+        if paypal_payment.create():
             return redirect(paypal_payment.links[1].href)
         else:
             return render(request, 'payment_app/error.html')
@@ -181,6 +181,7 @@ class LiqPayCallbackView(generic.View):
     """
     Вигляд для калл беку liqpay.
     """
+
     def post(self, request, *args, **kwargs):
         liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
         data = request.POST.get('data')
@@ -201,7 +202,7 @@ class LiqPayCallbackView(generic.View):
                 client = order.client
                 client.balance += decimal.Decimal(order_price)
                 if (order.fonds == 'USD' and order.value >= 200) or \
-                    (order.fonds == 'EUR' and order.value >= 180):
+                        (order.fonds == 'EUR' and order.value >= 180):
                     client.status = 'reseller'
                 client.save()
             else:

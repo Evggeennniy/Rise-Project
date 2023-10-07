@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'debug_toolbar',
     'storages',
-    
+
     # apps
     'accounts',
     'support',
@@ -77,9 +77,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    
+
     # 'services.middleware.HostHeaderCheckMiddleware'
 ]
 
@@ -107,7 +107,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                
+
                 # other
                 'settings.context_processors.footer_context',
             ],
@@ -118,6 +118,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'settings.wsgi.application'
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'defaultdb',
@@ -128,9 +133,9 @@ DATABASES = {
     },
 }
 
-# AUTHENTICATION_BACKENDS = (
-#     'allauth.account.auth_backends.AuthenticationBackend',
-# )
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
