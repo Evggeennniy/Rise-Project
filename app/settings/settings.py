@@ -133,9 +133,9 @@ DATABASES = {
     },
 }
 
-AUTHENTICATION_BACKENDS = (
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
+# AUTHENTICATION_BACKENDS = (
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# )
 
 AUTH_PASSWORD_VALIDATORS = [
     {
