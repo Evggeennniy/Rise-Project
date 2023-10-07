@@ -72,7 +72,7 @@ class Order(models.Model):
     price = models.DecimalField(verbose_name='Ціна', max_digits=10, decimal_places=2, default=0.0, blank=True)
 
     order_id = models.CharField(verbose_name='Номер заказу', max_length=32, blank=True)
-    status = models.IntegerField(verbose_name='Статус', choices=services_choices.ORDER_STATUS, default='created')
+    status = models.CharField(verbose_name='Статус', choices=services_choices.ORDER_STATUS, default='created')
 
     data = models.DateTimeField(verbose_name='Дата', auto_now_add=True, blank=True, null=True)
 
