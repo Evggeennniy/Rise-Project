@@ -15,8 +15,6 @@ class ApiClient(ABC):
         response = requests.get(url, params=params)
         if response.status_code == 200:
             return response.json()
-        else:
-            return f'Ошибка сервера. [{response.status_code}]'
 
     @abstractmethod
     def create_order(self) -> dict:
@@ -36,6 +34,17 @@ class WiQApiClient(ApiClient):
     Класс для клиента Api к WiQ сервису.
     """
 
+    errors = {
+        'balance': 'balance_error',
+        'Service does not exists.': 'id_error',
+    }
+    statuses = {
+        'Processing': 'processing',
+        'In progress': 'processing',
+        'Pending': 'processing',
+        'Completed': 'completed',
+    }
+
     def create_order(self, service_id, quantity, link) -> dict:
         params = {
             'key': self.api_key,
@@ -46,21 +55,14 @@ class WiQApiClient(ApiClient):
         }
         response = self.get_response(self.url, params=params)
         order_id = response.get('order', False)
-        error = response.get('Error', False)
 
         if order_id:
             response['success'] = True
-            return response
-        elif error == 'balance':
-            response['success'] = False
-            return dict(order='balance_error')
-        elif error == 'Service does not exists.':
-            response['success'] = False
-            return dict(order='id_error')
         else:
             response['success'] = False
-            print(f'NewErrCreate with {error} WIQ')
-            return dict(order='unknown_error')
+            error = response.get('Error')
+            response['error'] = self.errors.get(error)
+        return response
 
     def get_status(self, order_id) -> dict:
         params = {
@@ -69,20 +71,27 @@ class WiQApiClient(ApiClient):
             'order': order_id,
         }
         response = self.get_response(self.url, params=params)
-        status = response.get('status', False)
 
-        if status == 'Processing' or status == 'In progress' or status == 'Pending':
-            return dict(status='processing')
-        elif status == 'Completed':
-            return dict(status='completed')
-        else:
-            print(f'NewErrStatus with {order_id}: {status} WIQ')
+        status = response.get('status')
+        response['status'] = self.statuses.get(status)
+        return response
 
 
 class GlobalApiClient(ApiClient):
     """
     Класс для клиента Api к GlobalSmm сервису.
     """
+    errors = {
+        'neworder.error.not_enough_funds': 'balance_error',
+        'error.incorrect_service_id': 'id_error',
+    }
+    statuses = {
+        'Partial': 'processing',
+        'In progress': 'processing',
+        'Pending': 'processing',
+        'Completed': 'completed',
+        'Canceled': 'canceled'
+    }
 
     def create_order(self, service_id, quantity, link) -> dict:
         params = {
@@ -94,21 +103,14 @@ class GlobalApiClient(ApiClient):
         }
         response = self.get_response(self.url, params=params)
         order_id = response.get('order', False)
-        error = response.get('error', False)
 
         if order_id:
             response['success'] = True
-            return response
-        elif error == 'neworder.error.not_enough_funds':
-            response['success'] = False
-            return dict(order='balance_error')
-        elif error == 'error.incorrect_service_id':
-            response['success'] = False
-            return dict(order='id_error')
         else:
             response['success'] = False
-            print(f'NewErrCreate with {error} GLOBAL')
-            return dict(order='unknown_error')
+            error = response.get('error')
+            response['error'] = self.errors.get(error)
+        return response
 
     def get_status(self, order_id):
         params = {
@@ -119,14 +121,8 @@ class GlobalApiClient(ApiClient):
         response = self.get_response(self.url, params=params)
         status = response.get('status', False)
 
-        if status == 'Partial' or status == 'In progress' or status == 'Proccessing' or status == 'Pending':
-            return dict(status='processing')
-        elif status == 'Completed':
-            return dict(status='completed')
-        elif status == 'Canceled':
-            return dict(status='canceled')
-        else:
-            print(f'NewErrStatus with {order_id}: {status} GLOBAL')
+        response['status'] = self.statuses.get(status)
+        return response
 
     # def get_multiple_status(self, *order_ids) -> dict:
     #     data_of_orders = dict()
