@@ -80,6 +80,11 @@ class Order(models.Model):
     def __str__(self) -> str:
         return f'Послуга {self.service.service_name}, Кількість {self.count}, Ціна {self.price} '
 
+    def get_status_for_user(self):
+        status = self.status
+        if status == 'id_error' or status == 'canceled' or status == 'not_known':
+            return 'Вiдмовлено. Кошти поверненнi.'
+
     class Meta:
         verbose_name = 'Замовлення'
         verbose_name_plural = 'Замовлення'

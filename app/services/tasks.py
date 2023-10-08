@@ -29,20 +29,25 @@ def handlering_order(order_id):
     order_from_client = execution_client.create_order(service_id, quantity, link)
 
     # Запис результату.
-    order_success = order_from_client.get('success')
-    order_id = order_from_client.get('order')
+    try:
+        order_success = order_from_client.get('success')
+    except AttributeError:
+        return f'Ошибка!!! Заказ номер №{order.id}'
 
+    order_id = order_from_client.get('order')
     if order_success:
         order.order_id = order_id
         order.status = 'processing'
         order.save()
-        return f'Отправлен заказ номер №{order.id}'
     else:
-        order.status = order_from_client.get('error')
-        client.balance += price
-        client.save(), order.save()
+        status = order_from_client.get('error')
+        if status != 'balance_error':
+            client.balance += price
+            client.save()
+        order.status = status
+        order.save()
 
-        return f'Возврат средств за заказ номер №{order.id}'
+    return f'Обработан заказ номер №{order.id}'
 
 
 @shared_task
