@@ -38,14 +38,14 @@ def handlering_order(order_id):
     if order_success:
         order.order_id = order_id
         order.status = 'processing'
-        order.save()
     else:
         status = order_from_client.get('error')
         if status != 'balance_error':
             client.balance += price
             client.save()
         order.status = status
-        order.save()
+
+    order.save()
 
     return f'Обработан заказ номер №{order.id}'
 
