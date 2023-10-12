@@ -15,7 +15,7 @@ SERVICE_CLIENTS = {
 @shared_task
 def handlering_order(order_id):
     # Збір даних про замовлення.
-    order = services_models.Order.objects.get(id=order_id).select_related('client')
+    order = services_models.Order.objects.get(id=order_id)
 
     client = order.client
     self_to_service = order.service_type.get_self_to_service_display()
