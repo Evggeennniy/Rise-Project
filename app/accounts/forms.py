@@ -73,7 +73,7 @@ class CreatePaymentForm(forms.ModelForm):
 
     value = forms.CharField(
         label='Сума',
-        widget=forms.TextInput(attrs={'placeholder': 'Мiнiмальнo 150 гривень'})
+        widget=forms.TextInput(attrs={'placeholder': 'Мiнiмальнo 150 грн'})
     )
 
     # Ініціалізація.
