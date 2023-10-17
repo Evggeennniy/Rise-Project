@@ -24,10 +24,12 @@
     }
     .copy-button {
         float: right;
+        color: black;
         border-radius: 20px;
         background-color: white;
         border: 1px solid black;
         width: 80px;
+        height: 28px;
 
     }
 </style>
@@ -40,8 +42,8 @@
 
                 <div>
                     <p class="card-number" id="cardNumber">5375 4115 9012 5097
-                        <button class="copy-button"
-                            onclick="copyCardNumber()">Сopy</button>
+                        <input class="copy-button btn btn-outline-info"
+                            onclick="copyCardNumber()" value="Copy">
                     </p>
                 </div>
 
