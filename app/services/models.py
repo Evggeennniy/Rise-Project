@@ -73,7 +73,7 @@ class Order(models.Model):
 
     order_id = models.CharField(verbose_name='Номер заказу', max_length=32, blank=True)
     status = models.CharField(verbose_name='Статус', choices=services_choices.ORDER_STATUS,
-                              default='created', max_length=16)
+                              default='created', max_length=128)
 
     data = models.DateTimeField(verbose_name='Дата', auto_now_add=True, blank=True, null=True)
 

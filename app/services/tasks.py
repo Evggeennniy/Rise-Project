@@ -17,7 +17,6 @@ def handlering_order(order_id):
     # Збір даних про замовлення.
     order = services_models.Order.objects.get(id=order_id)
 
-    client = order.client
     self_to_service = order.service_type.get_self_to_service_display()
     service_id = order.service_type.service_id
     quantity = order.count
@@ -39,10 +38,10 @@ def handlering_order(order_id):
         order.order_id = order_id
         order.status = 'processing'
     else:
-        status = order_from_client.get('error')
+        status = order_from_client.get('error', 'not_known')
         if status != 'balance_error':
-            client.balance += price
-            client.save()
+            order.client.balance += price
+            order.client.save()
         order.status = status
 
     order.save()

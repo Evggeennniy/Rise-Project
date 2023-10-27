@@ -61,7 +61,7 @@ class WiQApiClient(ApiClient):
         else:
             response['success'] = False
             error = response.get('Error')
-            response['error'] = self.errors.get(error)
+            response['error'] = self.errors.get(error, 'not_known')
         return response
 
     def get_status(self, order_id) -> dict:
@@ -82,15 +82,16 @@ class GlobalApiClient(ApiClient):
     Класс для клиента Api к GlobalSmm сервису.
     """
     errors = {
-        'neworder.error.not_enough_funds': 'balance_error',
+        'Not enough funds on balance': 'balance_error',
         'error.incorrect_service_id': 'id_error',
+        'You have active order with this link. Please wait until order being completed.': 'active_order_link'
     }
     statuses = {
         'Partial': 'processing',
         'In progress': 'processing',
         'Pending': 'processing',
         'Completed': 'completed',
-        'Canceled': 'canceled'
+        'Canceled': 'canceled',
     }
 
     def create_order(self, service_id, quantity, link) -> dict:
@@ -109,7 +110,7 @@ class GlobalApiClient(ApiClient):
         else:
             response['success'] = False
             error = response.get('error')
-            response['error'] = self.errors.get(error)
+            response['error'] = self.errors.get(error, 'not_known')
         return response
 
     def get_status(self, order_id):
