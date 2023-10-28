@@ -50,7 +50,7 @@ class ServiceOrderCreate(LoginRequiredMixin, generic.CreateView):
     cache_time = 60 * 5
     queryset = services_models.Service.objects
     form_class = services_forms.OrderForm
-    success_url = reverse_lazy('order_created')
+    success_url = reverse_lazy('services_category')
     template_name = "createserviceorder.html"
 
     def get_form_kwargs(self):

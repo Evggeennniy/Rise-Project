@@ -12,15 +12,16 @@
 </style>
 
 <div class="main_block">
-<div class="shadow-lg container block border_radius20 px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4"
-        src="{% static 'logo_black.png' %}" alt width="72"
-        height="57">
+    <div
+        class="shadow-lg container block border_radius20 px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4"
+            src="{% static 'logo_black.png' %}" alt width="72"
+            height="57">
         <!-- <h2 class="pb-2 border-bottom">Готово !</h2> -->
-    <div class="col-lg-6 mx-auto py-5">
-        <p class="lead mb-4">Ваш заказ відправлений в обробку !</p>
+        <div class="col-lg-6 mx-auto py-5">
+            <p class="lead mb-4">Ваш заказ відправлений в обробку !</p>
+        </div>
+        <a class="btn btn-outline-secondary" href="{% url 'index' %}">До заказiв</a>
     </div>
-    <a class="btn btn-outline-secondary" href="{% url 'index' %}">На головну</a>
-</div>
 </div>
 {% endblock content %}

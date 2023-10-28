@@ -73,7 +73,11 @@ def checking_completed_orders():
             order_id = order.order_id
 
             order_data = execution_client.get_status(order_id)
-            order.status = order_data.get('status')
+            status = order_data.get('status')
+            order.status = status
+            if status == 'canceled':
+                order.client.balance += order.price
+                order.client.save()
             order.save()
 
             time.sleep(2)
