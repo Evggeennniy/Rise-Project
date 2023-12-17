@@ -71,6 +71,11 @@ class CreatePaymentForm(forms.ModelForm):
     Форма для вибору варианту плати.
     """
 
+    value = forms.CharField(
+        label='Сума',
+        widget=forms.TextInput(attrs={'placeholder': 'Мiнiмальнo 150 грн'})
+    )
+
     # Ініціалізація.
     def __init__(self, *args, **kwargs):
         self.client_id = kwargs.pop('client_id')

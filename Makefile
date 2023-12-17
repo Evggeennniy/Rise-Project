@@ -40,10 +40,10 @@ collstat:
 	$(manage_py) collectstatic
 
 runcelw:
-	cd app & celery -A settings worker --loglevel=INFO
+	cd app && celery -A settings worker --loglevel=INFO
 
 runcelb:
-	cd app & celery -A settings beat --loglevel=INFO
+	cd app && celery -A settings beat --loglevel=INFO
 
 build_and_run:
 	$(manage_py) makemigrations 

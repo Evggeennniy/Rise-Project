@@ -72,12 +72,18 @@ class Order(models.Model):
     price = models.DecimalField(verbose_name='Ціна', max_digits=10, decimal_places=2, default=0.0, blank=True)
 
     order_id = models.CharField(verbose_name='Номер заказу', max_length=32, blank=True)
-    status = models.IntegerField(verbose_name='Статус', choices=services_choices.ORDER_STATUS, default=0)
+    status = models.CharField(verbose_name='Статус', choices=services_choices.ORDER_STATUS,
+                              default='created', max_length=128)
 
     data = models.DateTimeField(verbose_name='Дата', auto_now_add=True, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'Послуга {self.service.service_name}, Кількість {self.count}, Ціна {self.price} '
+
+    def get_status_for_user(self):
+        status = self.status
+        if status == 'id_error' or status == 'canceled' or status == 'not_known':
+            return 'Вiдмовлено. Кошти поверненнi.'
 
     class Meta:
         verbose_name = 'Замовлення'
