@@ -17,16 +17,21 @@
             crossorigin="anonymous">
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=2">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=3">
         <title>RiseTop</title>
     </head>
 
     <body>
-
-        <img src="{% static 'Blob1.png' %}" class="blob1">
+        <!-- <img src="{% static 'Blob1.png' %}" class="blob1">
         <img src="{% static 'Blob2.png' %}" class="blob2">
         <img src="{% static 'Blob2.png' %}" class="blob3">
-        <img src="{% static 'Blob2.png' %}" class="blob4">
+        <img src="{% static 'Blob2.png' %}" class="blob4"> -->
+
+        <style>
+            body {
+                background-image: url("{% static 'Blob2.png' %}");
+            }
+        </style>
 
         <div class="page">
             {% include 'navbar.html' %}
