@@ -4,41 +4,52 @@
 
 {% block content %}
 
+<style>
+    .balance,
+    .profile-form input,
+    .profile-button {
+        background: rgba(39, 45, 45, 0.79);
+        color: white;
+    }
+</style>
+
 <div class="container" id="profile-block">
     <div class="row g-5">
-        <div class="col-md-5 col-lg-4 order-md-last">
-            <!-- <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-black">Баланс</span>
-                    <span class="badge green_style rounded-pill">  UAH</span>
-                    
-                </h4> -->
-            <ul class="list-group mb-3">
-                <li
-                    class="block list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                        <h6 class="my-0">Баланс</h6>
-                        <small class="text-muted">Ваші особисті кошти.</small>
-                    </div>
-                    <span class="text-muted">{{ object.balance }} USD</span>
-                </li>
-                <a class="pay-button btn btn-warning"
-                    href="{% url 'create_payment' %}">Пополнить баланс</a>
-            </ul>
-
-        </div>
         <div
-            class="shadow-lg border-radius form-body col-md-10 mx-auto col-lg-5 py-5 bg-dark text-white">
+            class="shadow-lg border-radius form-body col-md-10 mx-auto col-lg-5 py-5 text-white">
+            <div class>
+                <!-- <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-black">Баланс</span>
+                        <span class="badge green_style rounded-pill">  UAH</span>
+                        
+                    </h4> -->
+                <ul class="list-group mb-3">
+                    <li
+                        class="block balance list-group-item d-flex justify-content-between lh-sm">
+                        <div class>
+                            <h6 class="my-0">Баланс</h6>
+                            <small class="text-muted">Ваші особисті
+                                кошти.</small>
+                        </div>
+                        <span class="text-muted">{{ object.balance }} USD</span>
+                    </li>
+                    <a class="pay-button btn btn-warning"
+                        href="{% url 'create_payment' %}">Пополнить баланс</a>
+                </ul>
+
+            </div>
             <h4 class="mb-3">Профиль</h4>
 
             <hr>
-            <form method="post" class="needs-validation" novalidate>
+            <form method="post" class="needs-validation profile-form"
+                novalidate>
                 <div class="row g-3">
 
                     {% csrf_token %}
                     {{ form | crispy }}
                     <hr>
                     <button
-                        class="bg-white w-100 btn rounded-pill text-black"
+                        class="profile-button w-100 btn rounded-pill"
                         type="submit">Сохранить</button>
                 </div>
             </form>

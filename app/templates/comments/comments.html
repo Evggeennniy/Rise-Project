@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-<!-- {% load static %} -->
+{% load static %}
 
 {% block content %}
 
@@ -35,46 +35,28 @@
     }
 </style>
 
-<main class="container ">
-    <div class="item fade-left main_block shadow-lg block my-3 p-3 bg-body rounded shadow-sm">
-        <h6 class="border-bottom pb-2 mb-0">Відгуки</h6>
-        {% if object_list %}
-        {% for obj in object_list %}
-        <div class=" animated_block fade-in messages d-flex text-body-secondary pt-3">
-            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded"
-                width="32" height="32" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: 32x32"
-                preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect
-                    width="100%" height="100%" fill="#007bff"></rect><text
-                    x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-            <p class="pb-3 mb-0 small lh-sm">
-                <strong class="d-block text-gray-dark">@{{ obj.client.username}}
-                    <small class="data text-muted">{{ obj.data }}</small></strong>
-                {{ obj.comment }} -
-                {% for _ in obj.get_rating %}
-                  ★
-                {% endfor %}
-            </p>
-            
-
-        </div>
-
-        {% endfor %}
-        {% else %}
-        <div class="animated_block fade-in empty_message col-sm-8 py-5 mx-auto">
-            <h3 class="display-6 fw-normal text-muted">Поки що тут нічого немає.</h3>
-            <strong class="fs-5 text-muted">iнформацiя оновлюється</strong>
-        </div>
-        {% endif %}
-
-        <a href="{% url 'create_comment' %}"
-            class="text-black-50  px-2 nav_link">Создать</a>
-
-        <!-- <small class="d-block text-end mt-3">
-        <a href="#">All updates</a>
-      </small> -->
+<div class="comments">
+  <h4 class="comments__header">Тут ти можеш прочитати або залишити відгуки про
+    наш сервіс</h4>
+  <ul class="comments__list">
+    {% for comment in comment_list %}
+    {% if comment.is_active %}
+    <li class="comments__list-item">
+      <div class="comments__list-item__header">
+        <p>@{{ comment.client.username }}</p>|
+        <p>{{ comment.data }}</p>
+      </div>
+      <p class="comments__list-item__review">{{ comment.comment }}</p>
+    </li>
+    {% endif %}
+    {% endfor %}
+    <div class="comments__button">
+      <a href="{% url 'create_comment' %}"
+        class="comments__button-link">Cтворити</a>
     </div>
-</main>
+  </ul>
+
+</div>
 
 <script>
     const leftItems = document.querySelectorAll('.fade-left');

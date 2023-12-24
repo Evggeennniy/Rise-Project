@@ -1,25 +1,17 @@
-<style>
-        .page_link {
-                margin: 5px;
-                border-radius: 20pc;
-                opacity: 0.6;
-                text-decoration: none;
-                color: black;
-                background-color: aliceblue;
-                padding: 10px;
-        }
-</style>
 
 <div>
         <ul class="pagination justify-content-center">
                 {% if page_obj.has_previous %}
-                <li class><a class="page_link text-dark"
-                                href="?page=1&{{ filter_params }}">На початок</a></li>
+                <li class="page_fast"><a class="page_link  text-dark"
+                                href="?page=1&{{ filter_params }}">На
+                                початок</a></li>
                 <li class><a class="page_link text-dark"
                                 href="?page={{ page_obj.previous_page_number }}&{{ filter_params }}">Назад</a></li>
                 {% else %}
-                <li class=" disabled"><a class="page_link">На початок</a></li>
-                <li class=" disabled"><a class="page_link">Назад</a></li>
+                <li class="page_fast disabled"><a class="page_link">На
+                                початок</a></li>
+                <li class=" disabled"><a
+                                class="page_link">Назад</a></li>
                 {% endif %}
 
                 <button class="btn btn-sm disabled">
@@ -31,12 +23,13 @@
                 {% if page_obj.has_next %}
                 <li class><a class="page_link text-dark"
                                 href="?page={{ page_obj.next_page_number }}&{{ filter_params }}">Вперед</a></li>
-                <li class><a class="page_link text-dark"
+                <li class="page_fast"><a class="page_link  text-dark"
                                 href="?page={{ page_obj.paginator.num_pages }}&{{ filter_params }}">
                                 В кiнець</a></li>
                 {% else %}
                 <li class=" disabled"><a class="page_link">Вперед</a></li>
-                <li class=" disabled"><a class="page_link">В кiнець</a></li>
+                <li class="page_fast disabled"><a class="page_link">В
+                                кiнець</a></li>
                 {% endif %}
 
         </ul>

@@ -9,6 +9,7 @@
 <style>
   .main_block {
     padding: 20px;
+    color: white;
   }
   .logo_block {
     padding: 10px;
@@ -37,47 +38,35 @@
   }
 </style>
 
-<main class="container main_block border_radius20">
-  <div class="item fade-left p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-    <div class="col-lg-6 px-0">
-      <h1 class="display-5 fst-italic">Хей! Читай останні новини
+<main class="posts container main_block border_radius20">
+  <div
+    class="item posts__introduction fade-left rounded text-body-emphasis bg-body-secondary">
+    <div class>
+      <h1 class="display-5 bold">Хей! Читай останні новини
         та Rise оновлення тут.</h1>
-      <p class="lead my-3">Будь то нові ціни на категорії, чи як скоро з'являться
+      <p class="lead my-3">Будь то нові ціни на категорії, чи як скоро
+        з'являться
         нові соц мережі, ти будеш бачити це саме в Rise постах.</p>
     </div>
   </div>
 
   {% if object_list %}
-  <div class="row mb-2">
+  <div class="posts__list mb-2 row animated_block fade-in">
     {% for obj in object_list %}
-    <div class="col-md-6">
-      <div
-        class="block animated_block fade-in shadow-lg row bg g-0 border">
-        <div class="col p-4 d-flex flex-column position-static">
-          <!-- <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong> -->
-          <h2 class="pb-2 border-bottom">{{ obj.header }}</h2>
-          <small class="data text-muted">{{ obj.data }}</small>
-          <p class="card-text mb-auto">{{ obj.short_description }}</p>
-          <a href="detail/{{ obj.id }}"
-            class="description_text">
-            Детальніше
-          </a>
-        </div>
-        <div class="logo_block col-auto d-lg-block">
-          <img src="{% static 'logo_black.png' %}"
-            alt="logo"
-            class
-            width="32" height="32">
-        </div>
-      </div>
+    <div class="posts__list-item">
+      <div class="posts__list-item__description">
+        {{obj.short_description}}</div>
+      <a class="posts__list-item__button"
+        href="{% url 'post_detail' obj.id %}">Подробиці</a>
     </div>
     {% endfor %}
   </div>
 
   {% else %}
-  <div class="animated_block fade-in empty_message col-sm-8 py-5 mx-auto">
-    <h3 class="display-6 fw-normal text-muted">Поки що тут нічого немає.</h3>
-    <strong class="fs-5 text-muted">iнформацiя оновлюється</strong>
+  <div
+    class="animated_block text-center fade-in empty_message col-sm-8 py-5 mx-auto">
+    <h3 class="display-6 fw-normal">Поки що тут нічого немає.</h3>
+    <h4 class="fs-5">Оновлюємо інформацію</h4>
   </div>
   {% endif %}
 

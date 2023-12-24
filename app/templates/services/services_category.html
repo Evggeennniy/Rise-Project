@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="container px-4 py-5" id="services-category-block">
+<div class="container px-4" id="services-category-block">
     <div id class="d-flex justify-content-around align-items-center">
         <h2 class="pb-2 border-bottom">Виберіть послугу</h2>
     </div>
@@ -17,7 +17,7 @@
                 class="item fade-right shadow-lg block border-radius">
 
                 <div
-                    class="d-flex flex-column h-100 p-5 pb-3 text-black text-shadow-1">
+                    class="d-flex flex-column h-100 text-shadow-1">
                     <a href="{% url 'create_service_order' obj.id %}"
                         class="block_link nav-link">
 

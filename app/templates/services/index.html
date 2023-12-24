@@ -29,107 +29,50 @@
   }
 </style>
 
-<div class="container fade-in-down-up animated_block-down-up" id="welcome-block">
-  <div class="header"><h1 class="display-1 fw-bold lh-1 mb-3">Rise</h1></div>
-  <div class="description"><p class="lead">Надаємо якість, гарну ціну, автономну
-      систему<br> для просування твоїх соц мереж.<br>
-      Те, що ти зможеш зробити в пару кліків.</p></div>
+<div class="introduction fade-in-down-up animated_block-down-up">
+  <div class="introduction__info">
+    <h1 class="introduction__info-header">RISE</h1>
+    <h2 class="introduction__info-underheader">INFOBUSINESS<br>
+      CORPORATION</h1>
+    <p class="inroduction__info-description">Надаємо якість, гарну ціну,
+      автономну систему<br>для просування твоїх соц. мереж</p>
+    <div class="introduction__info-button"><a
+        href="{% url 'services_category' %}"
+        class="introduction__info-button-link">Замовити просування <img
+          src="{% static 'vector.svg' %}" alt class="vector"></a></div>
+
+  </div>
+  <img class="introduction__image" src="{% static 'intr_image.png' %}"
+    alt="introduction image">
 </div>
 
-<div class="px-4 bg-dark border-radius"
-  id="services-block">
-  <!-- <div id
-    class="d-flex justify-content-around align-items-center container text-white">
-    <h2 class="pb-2 border-bottom">Виберіть послугу</h2>
-  </div> -->
+<div class="arrow">
+  <img class="arrow-img" src="{% static 'movedown.png' %}"
+    alt="move down arrow">
+</div>
 
-  {% if object_list %}
-  <div
-    class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5 container fade-right animated_block-right-left">
-    {% for obj in object_list %}
-    <div class="col service-col">
-      <a href="{% url 'services_category' obj.id %}"
-        class="service-link nav-link">
-        <div
-          class="item shadow-lg border-radius service-item">
-          <div
-            class="d-flex flex-column h-100 text-black text-shadow-1">
-            <div class="service-information">
-              <img src="{{ obj.logo.url }}"
-                alt="logo"
-                class="service-image border-radius"
-                width="100" height="100">
-              <h4 class="service-header">{{ obj.name }}</h4>
-              <p class="service-description">{{ obj.description }}</p>
-              <p class="service-button text-white bg-dark border-radius">Обрати</p>
-            </div>
-          </div>
-        </div>
+<div class="offers fade-in-down-up animated_block-down-up">
+  <div class="offers__header">
+    <h2 class="offers__header-text">PROMOTION</h2>
+  </div>
+
+  <ul class="offers__list">
+    {% for social in socialnetwork_list %}
+    {% if social.is_active %}
+    <li class="offers__list-item">
+      <div class="offers__list-item__logo"><img src="{{ social.logo.url }}"
+          alt="logo"
+          class="offers__list-item__logo-img"></div>
+
+      <a href="{% url 'services_category' social.id %}"
+        class="offers__list-item__link">
+        <p class="offers__list-item__button">Обрати</p>
       </a>
-    </div>
-    {% endfor %}
+    </li>
     {% endif %}
-  </div>
-
-</div>
-
-<div id="sinonim-block">
-  <div
-    class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5 container fade-in-down-up animated_block-down-up">
-
-    <div class="col sinonim-col">
-      <div
-        class="item shadow-lg border-radius sinonim-item">
-        <div
-          class="d-flex flex-column h-100 text-black text-shadow-1">
-          <div class="sinonim-information">
-            <img src="{% static 'zruchnist.png' %}"
-              alt="logo"
-              class="sinonim-image border-radius"
-              width="100" height="100">
-            <p class="sinonim-description">Замовлення в пару кліків</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col sinonim-col">
-      <div
-        class="item shadow-lg border-radius sinonim-item">
-        <div
-          class="d-flex flex-column h-100 text-black text-shadow-1">
-          <div class="sinonim-information">
-            <img src="{% static 'shwidkist.png' %}"
-              alt="logo"
-              class="sinonim-image border-radius"
-              width="100" height="100">
-            <p class="sinonim-description">Миттєва обробка замовлень</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col sinonim-col">
-      <div
-        class="item shadow-lg border-radius sinonim-item">
-        <div
-          class="d-flex flex-column h-100 text-black text-shadow-1">
-          <div class="sinonim-information">
-            <img src="{% static 'iakist.png' %}"
-              alt="logo"
-              class="sinonim-image border-radius"
-              width="100" height="100">
-            <p class="sinonim-description">Якість та, що вам потрібно</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div id="phones-block" class="fade-in-down-up animated_block-down-up container">
-  <img src="{% static 'phones.png' %}" alt="phones image" class="image">
+    {% endfor %}
+  </ul>
+  <h2 class="offers__underheader">Те, що ти зможеш зробити в пару кліків</h2>
 </div>
 
 <script>

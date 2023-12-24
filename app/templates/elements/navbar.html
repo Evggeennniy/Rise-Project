@@ -1,56 +1,90 @@
 {% load static %}
 
-<nav id="navbar-block" class="navbar navbar-expand-lg"
-  aria-label="Tenth navbar example">
-  <div class="container-fluid">
-    <button class="navbar-toggler text-white" type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarsExample08" aria-controls="navbarsExample08"
+<nav class="navbar navbar-expand-lg navbar-dark"
+  aria-label="Ninth navbar example">
+  <div class="container-xl">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarsExample07XL" aria-controls="navbarsExample07XL"
       aria-expanded="false" aria-label="Toggle navigation">
-      <img src="{% static 'palochki.png' %}" alt="palochki" width="30px"
-        height="20px">
+      <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-md-center"
-      id="navbarsExample08">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}">Головна</a>
+    <div class="collapse navbar-collapse" id="navbarsExample07XL">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="navbar__list-item nav-item">
+          <a class="navbar__list-link nav-link"
+            href="{% url 'index' %}">Головна</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'services_category' %}">Послуги</a>
+        <li class="navbar__list-item nav-item">
+          <a class="navbar__list-link nav-link"
+            href="{% url 'vacantions' %}">Вакансія</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'support_mails' %}">Пiдтримка</a>
+        <li class="navbar__list-item nav-item">
+          <a class="navbar__list-link nav-link"
+            href="{% url 'services_category' %}">Послуги</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'posts' %}">Пости</a>
+        <li class="navbar__list-item nav-item">
+          <a class="navbar__list-link nav-link"
+            href="{% url 'support_mails' %}">Пiдтримка</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'comments' %}">Biдгуки</a>
+        <li class="navbar__list-item nav-item">
+          <a class="navbar__list-link nav-link"
+            href="{% url 'posts' %}">Новини</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'orders_history' %}">Замовлення</a>
+        <li class="navbar__list-item nav-item">
+          <a class="navbar__list-link nav-link"
+            href="{% url 'comments' %}">Biдгуки</a>
         </li>
-        {% if request.user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'create_payment' %}">Поповнити
-            <strong>{{ request.user.balance }} $</strong> </a>
+        <li class="navbar__list-item nav-item">
+          <a class="navbar__list-link nav-link"
+            href="{% url 'orders_history' %}">Замовлення</a>
         </li>
-        <li class="nav-item">
-          <a class="btn btn-outline-secondary border-radius"
-            href="{% url 'logout' %}"
-            role="button">Вийти</a>
+        <li class="navbar__list-item nav-item">
+          <a href="{% url 'user_profile' %}"><img class="navbar__list-image"
+              src="{% static 'profile.svg' %}"
+              alt="profile"></a>
+
         </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="btn btn-outline-secondary border-radius"
-            href="{% url 'login' %}"
-            role="button">Увiйти</a>
-        </li>
-        {% endif %}
       </ul>
     </div>
-
   </div>
 </nav>
+
+<!-- <nav class="navbar">
+  <button class="navbar__button" type="button" ac></button>
+
+  <ul class="navbar__list">
+    <li class="navbar__list-item nav-item">
+      <a class="navbar__list-link nav-link" href="{% url 'index' %}">Головна</a>
+    </li>
+    <li class="navbar__list-item nav-item">
+      <a class="navbar__list-link nav-link" href="#">Вакансія</a>
+    </li>
+    <li class="navbar__list-item nav-item">
+      <a class="navbar__list-link nav-link"
+        href="{% url 'services_category' %}">Послуги</a>
+    </li>
+    <li class="navbar__list-item nav-item">
+      <a class="navbar__list-link nav-link"
+        href="{% url 'support_mails' %}">Пiдтримка</a>
+    </li>
+    <li class="navbar__list-item nav-item">
+      <a class="navbar__list-link nav-link" href="{% url 'posts' %}">Новини</a>
+    </li>
+    <li class="navbar__list-item nav-item">
+      <a class="navbar__list-link nav-link" href="{% url 'comments' %}">Biдгуки</a>
+    </li>
+    <li class="navbar__list-item nav-item">
+      <a class="navbar__list-link nav-link"
+        href="{% url 'orders_history' %}">Замовлення</a>
+    </li>
+    <li class="navbar__list-item nav-item">
+      <a href="{% url 'user_profile' %}"><img class="navbar__list-image"
+          src="{% static 'profile.svg' %}"
+          alt="profile"></a>
+
+    </li>
+  </ul>
+</nav>  -->
