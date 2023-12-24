@@ -7,13 +7,10 @@
 <style>
     .main_body {
         min-height: 700px;
-        border-radius: 20px;
+        color: white;
     }
     .message_block {
         max-width: 100%;
-    }
-    .left_comment_images {
-        padding: 10px;
     }
     .animated_block {
         margin-bottom: 20px;
@@ -28,9 +25,75 @@
     }
 </style>
 
-<main class="container col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<div class="support">
+    <div class="support__information">
+        <h6 class="support__information-header">Надіслані листи</h6>
+        <small class="support__information-count">
+            Кількість: {{ object_list.count }}
+        </small>
+    </div>
+    <div class="support__list">
+        {% if supportmail_list %}
+
+        {% for mail in supportmail_list %}
+        <div class="support__list-item">
+            <img src="{% static 'message.png' %}" alt="message"
+                class="support__list-item__img">
+            <div class="support__list-item__information">
+                <h4 class="support__list-item__header">Teма:
+                    {{ mail.thema }}</h4>
+                <p class="support__list-item__question">
+                    {{ mail.question }}
+                </p>
+                {% if mail.answer %}
+                <div
+                    class="support__list-item__answer">
+                    <h4 class="support__list-item__answer-header">
+                        Відповідь:
+                    </h4>
+                    <p class="support__list-item__answer-text">
+                        {{ mail.answer }}
+                    </p>
+                </div>
+                {% endif %}
+                <div class="support__list-item__data">
+                    {{ mail.data }}
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+        {% endif %}
+        <div class="support__button"><a href="{% url 'create_support_mail' %}"
+                class="support__button-link">Створити</a></div>
+    </div>
+
+</div>
+
+<script>
+    const blocks = document.querySelectorAll('.fade-in');
+
+    function checkFade() {
+      blocks.forEach(block => {
+        const rect = block.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if (rect.top <= windowHeight * 0.8) {
+          block.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', checkFade);
+    window.addEventListener('load', checkFade);
+</script>
+
+{% endblock content %}
+
+<!-- <main class="container col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div
-        class="animated_block fade-in block fade-in shadow-lg shadow-sm main_body mt-3">
+        class="animated_block fade-in block fade-in main_body mt-3">
         <div class="my-3 p-3 ">
             <small class="d-block text-end">
                 <a>Кількість: {{ object_list.count }}</a>
@@ -53,7 +116,8 @@
                         <p class="text-muted">{{ obj.question }}</p>
 
                         <span class="d-block">@{{ request.user.username }}
-                            <small class="data text-muted">{{ obj.data }}</small></span>
+                            <small class="data text-muted">{{ obj.data
+                                }}</small></span>
                     </div>
                 </div>
 
@@ -69,7 +133,8 @@
 
                 <div class="pb-3 mb-0 small lh-sm">
                     <div class="d-flex justify-content-between">
-                        <strong class="text-gray-dark">- {{ obj.answer }}</strong>
+                        <strong class="text-gray-dark">- {{ obj.answer
+                            }}</strong>
                     </div>
                     <span class="d-block">@Адміністратор RT</span>
                 </div>
@@ -95,7 +160,7 @@
                         адміністрації</p>
                     <div
                         class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-                        <button type="button" ф
+                        <button type="button"
                             class="btn btn-outline-success btn-sm px-4"><a
                                 class="nav-link text-dark"
                                 href="{% url 'create_support_mail' %}">Створити</a></button>
@@ -115,24 +180,4 @@
             <br>
         </div>
     </div>
-</main>
-
-<script>
-    const blocks = document.querySelectorAll('.fade-in');
-
-    function checkFade() {
-      blocks.forEach(block => {
-        const rect = block.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        if (rect.top <= windowHeight * 0.8) {
-          block.classList.add('active');
-        }
-      });
-    }
-    
-    window.addEventListener('scroll', checkFade);
-    window.addEventListener('load', checkFade);
-</script>
-
-{% endblock content %}
+</main> -->

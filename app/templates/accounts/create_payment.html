@@ -5,6 +5,9 @@
 {% block content %}
 
 <style>
+    .payment {
+        color: white;
+    }
     .body {
         border-radius: 20px;
         max-width: 1000px;
@@ -12,31 +15,43 @@
     }
     .card-number {
         text-align: center;
-        border: 1px solid black;
-        background-color: white;
+        border: 1px solid white;
+        background: rgba(39, 45, 45, 0.79);
         border-radius: 20px;
+        
         height: 30px;
-
     }
     .warning-text {
         color: red;
         text-align: center;
     }
+
+    .body2 input {
+        background: rgba(39, 45, 45, 0.79);
+        color: white;
+    }
     .copy-button {
         float: right;
         color: black;
         border-radius: 20px;
-        background-color: yellow;
-        border: 1px solid black;
+        background-color: rgb(132, 132, 216);
+        border: none;
         width: 80px;
-        height: 28px;
-
+        height: 26px;
+    }
+    @media screen and (max-width: 700px) {
+        .body {
+            padding: 5px;
+        }
+        .body2 {
+            padding: 0px;
+        }
     }
 </style>
 
-<div class="container col-xxl-8 px-4 py-5">
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5 center">
-        <div class="col-10 col-sm-8 col-lg-6">
+<div class="payment container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 center">
+        <div class="col-10 col-sm-8 col-lg-6 body2">
             <form method="post" class=" shadow-lg body container"
                 enctype="multipart/form-data">
 
@@ -50,7 +65,8 @@
                 {% csrf_token %}
                 {{ form | crispy }}
 
-                <button type="submit" class="btn btn-success">Відправити</button>
+                <button type="submit"
+                    class="btn btn-success">Відправити</button>
             </form>
 
         </div>
@@ -58,7 +74,8 @@
             <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Як
                 поповнити баланс?</h1>
             <ul class="step"><strong>1) Скопіюйте номер картки</strong></ul>
-            <ul class="step"><strong>2) Введіть суму поповнення в грн</strong></ul>
+            <ul class="step"><strong>2) Введіть суму поповнення в
+                    грн</strong></ul>
             <ul class="step"><strong>3) Після переводу коштів прикріпіть скрін
                     або чек
                     переводу.</strong></ul>

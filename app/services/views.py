@@ -85,3 +85,7 @@ class MyOrdersView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(client_id=self.request.user.id).select_related('client', 'service')
+
+
+class VacantionsView(generic.TemplateView):
+    template_name = 'vacancions.html'

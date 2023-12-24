@@ -5,47 +5,54 @@
 {% block content %}
 
 <style>
-    .history_body {
-        border-radius: 20px;
-        min-height: 500px;
+.history_body {
+    border-radius: 20px;
+    min-height: 500px;
     }
     .order_image {
-        max-height: 50px;
-    }
-    .big_block {
-        padding: 5px;
-        margin: 5px;
+    max-height: 50px;
+}
 
-        opacity: 0.8;
+.big_block {
+    padding: 5px;
+    margin: 5px;
 
-        background-color: aliceblue;
-        border-radius: 10px;
-        width: 70%;
-    }
-    .central_content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .small_block {
-        padding: 0px;
-        margin: 5px;
+    opacity: 0.8;
 
-        opacity: 0.8;
+    background-color: aliceblue;
+    border-radius: 10px;
+    width: 70%;
+}
 
-        background-color: aliceblue;
-        border-radius: 10px;
-        width: 30%;
+.central_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     }
+
+.small_block {
+    padding: 0px;
+    margin: 5px;
+
+    opacity: 0.8;
+
+    background-color: aliceblue;
+    border-radius: 10px;
+    width: 30%;
+    }
+.history__header {
+    display: flex;
+    justify-content: space-between;
+}
 </style>
 
-<main class="container col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<div class="container text-white col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="history_body">
-        <div class>
-            <small class="d-block text-end">
+        <div class="history__header">
+            <p class="d-block">
                 <a>Кiлькiсть: {{ object_list.count }}</a>
             </small>
-            <h6 class="pb-2 mb-0">Iсторiя</h6>
+            <p class="pb-2 mb-0">Iсторiя</h6>
 
         </div>
 
@@ -58,7 +65,8 @@
                     {{ obj.service.service_name }} x
                     {{ obj.count }}
                     <br>
-                    <strong class="text-muted">{{ obj.get_status_display }}</strong>
+                    <strong class="text-muted">{{ obj.get_status_display
+                        }}</strong>
                 </strong>
 
             </div>
@@ -98,5 +106,5 @@
 
     </div>
 
-</main>
+</div>
 {% endblock content %}

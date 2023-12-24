@@ -22,13 +22,13 @@ class SupportMailForm(forms.ModelForm):
         widget=forms.Textarea(),
         required=True
     )
-    notes = forms.CharField(
-        label='Примітки',
-        min_length=0,
-        max_length=64,
-        help_text='Номер замовлення тощо.',
-        required=False
-    )
+    # notes = forms.CharField(
+    #     label='Примітки',
+    #     min_length=0,
+    #     max_length=64,
+    #     help_text='Номер замовлення тощо.',
+    #     required=False
+    # )
     report = forms.ImageField(
         label='Репорт',
         help_text='Ви можете прикріпити скріншот.',
@@ -41,7 +41,7 @@ class SupportMailForm(forms.ModelForm):
         fields = (
             'thema',
             'question',
-            'notes',
+            # 'notes',
             'report'
         )
 

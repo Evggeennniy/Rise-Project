@@ -15,22 +15,32 @@
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <title>RiseTop</title>
     </head>
 
     <body>
 
-        {% include 'navbar.html' %}
+        <img src="{% static 'Blob1.png' %}" class="blob1">
+        <img src="{% static 'Blob2.png' %}" class="blob2">
+        <img src="{% static 'Blob2.png' %}" class="blob3">
+        <img src="{% static 'Blob2.png' %}" class="blob4">
 
-        {% block content %}
-        {% endblock content %}
+        <div class="page">
+            {% include 'navbar.html' %}
 
-        {% include 'footer.html' %}
+            {% block content %}
+            {% endblock content %}
+
+            {% include 'footer.html' %}
+        </div>
 
         <!-- Optional JavaScript; choose one of the two! -->
 
-        <script type="text/javascript" src="{% static 'js/default.js' %}"></script>
+        <script type="text/javascript"
+            src="{% static 'js/default.js' %}"></script>
         <script src="//static.liqpay.ua/libjs/checkout.js" async></script>
         <!-- Option 1: Bootstrap Bundle with Popper -->
         <script
