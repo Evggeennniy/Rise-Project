@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-+q640znnpj98b*v+c!66^nl4!$ej_oe66t^*w@50oj(r**5hhj'
 
-CSRF_TRUSTED_ORIGINS = ['http://riseua.online',]
+CSRF_TRUSTED_ORIGINS = ['https://riseua.online',]
 
 DEBUG = False
 
