@@ -10,6 +10,7 @@ class ServicesCategoryAdmin(admin.ModelAdmin):
 
     # Поля виведення загального списку.
     list_display = (
+        'id',
         'name',
         'description',
         'is_active'
@@ -17,7 +18,9 @@ class ServicesCategoryAdmin(admin.ModelAdmin):
 
     # Поля за якими буде здійснюватися пошук.
     search_fields = (
+        'id',
         'name',
+        'description',
     )
 
     # Поля лише для читання.
@@ -34,6 +37,7 @@ class ServicesAdmin(admin.ModelAdmin):
 
     # Поля виведення загального списку.
     list_display = (
+        'id',
         'social_network',
         'service_name',
         'min_count'
@@ -41,6 +45,7 @@ class ServicesAdmin(admin.ModelAdmin):
 
     # Поля за якими буде здійснюватися пошук.
     search_fields = (
+        'id',
         'social_network',
         'service_name'
     )
@@ -100,6 +105,8 @@ class OrdersAdmin(admin.ModelAdmin):
 
     # Поля за якими буде здійснюватися пошук.
     search_fields = (
+        'client',
+        'service',
         'order_id',
         'price',
     )
