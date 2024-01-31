@@ -65,8 +65,8 @@ class Order(models.Model):
     База даних для збереження замовлень.
     """
     client = models.ForeignKey(verbose_name='Клієнт', to='accounts.User', on_delete=models.CASCADE)
-    service = models.ForeignKey(verbose_name='Послуга', to='services.Service', on_delete=models.DO_NOTHING)
-    service_type = models.ForeignKey(verbose_name='Тип послуги', to='services.ServiceType', on_delete=models.DO_NOTHING)
+    service = models.ForeignKey(verbose_name='Послуга', to='services.Service', on_delete=models.CASCADE)
+    service_type = models.ForeignKey(verbose_name='Тип послуги', to='services.ServiceType', on_delete=models.CASCADE)
     count = models.PositiveIntegerField(verbose_name='Кількість')
     url = models.URLField(verbose_name='Посилання', default='', blank=True)
     price = models.DecimalField(verbose_name='Ціна', max_digits=10, decimal_places=2, default=0.0, blank=True)
